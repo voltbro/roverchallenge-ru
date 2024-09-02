@@ -1,0 +1,23 @@
+{
+   "configurations": [
+      {
+         "env": {
+            "AMENT_PREFIX_PATH": "/opt/ros/humble",
+            "MODELS_DIR": "/home/igor/Projects/roverchallenge-ru/src/simulation/models",
+            "PYTHONPATH": "/home/igor/Projects/roverchallenge-ru/_utils:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages",
+            "SIM_DIR": "/home/igor/Projects/roverchallenge-ru/src/simulation"
+         },
+         "name": "sim",
+         "request": "launch",
+         "target": "/home/igor/Projects/roverchallenge-ru/src/simulation",
+         "type": "ros"
+      },
+      {
+         "name": "Python: Attach using Process Id",
+         "processId": "${command:pickProcess}",
+         "request": "attach",
+         "type": "python"
+      }
+   ],
+   "version": "0.2.0"
+}

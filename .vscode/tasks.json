@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build models",
+            "type": "shell",
+            "command": "source setup.sh && just build_models",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+            }
+        },
+        {
+          "label": "Build full",
+          "type": "shell",
+          "command": "source setup.sh && just build",
+          "problemMatcher": [],
+          "group": {
+              "kind": "build",
+              "isDefault": true
+          }
+      }
+    ]
+}
