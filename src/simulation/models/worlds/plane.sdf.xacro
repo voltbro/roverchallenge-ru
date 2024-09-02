@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.10">
+<world name="plane_world">
+
+<xacro:include filename="./plugins.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/common/simple_light.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/common/ground_plane.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/common/gui.xacro" />
+
+<model name='rover'>
+    <include>
+         <uri>file:/$(env MODELS_DIR)/rover/rover.urdf</uri>
+         <pose>0.0 0.0 0.3275 0.0 0 0.0</pose>
+    </include>
+</model>
+
+</world>
+</sdf>

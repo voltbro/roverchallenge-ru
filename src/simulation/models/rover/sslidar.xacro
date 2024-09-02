@@ -1,0 +1,39 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="sslidar" params="name xyz rpy">
+
+<link name="lidar_${name}"></link>
+<joint name="lidar_${name}_joint" type="fixed">
+    <parent link="base"/>
+    <child link="lidar_${name}"/>
+    <origin xyz="${xyz}" rpy="${rpy}"/>
+</joint>
+<gazebo reference="lidar_${name}">
+    <sensor name='lidar_${name}' type='gpu_lidar'>"
+        <gz_frame_id>lidar_${name}</gz_frame_id>
+        <topic>lidar_${name}</topic>
+        <update_rate>28</update_rate>
+        <ray>
+            <scan>
+                <horizontal>
+                    <samples>180</samples>
+                    <min_angle>${-pi / 4}</min_angle>
+                    <max_angle>${+pi / 4}</max_angle>
+                </horizontal>
+            </scan>
+            <range>
+                <min>0.03</min>
+                <max>0.3</max>
+            </range>
+            <noise>
+                <type>gaussian</type>
+                <mean>0.0</mean>
+                <stddev>0.004</stddev>
+            </noise>
+        </ray>
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+    </sensor>
+</gazebo>
+
+</xacro:macro>
+</include>

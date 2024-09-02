@@ -1,0 +1,14 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="primitive" params="name *origin *geometry">
+  <visual name="${name}">
+    <xacro:insert_block name="origin"/>
+    <xacro:insert_block name="geometry"/>
+  </visual>
+  <collision name="${name}">
+    <xacro:insert_block name="origin"/>
+    <xacro:insert_block name="geometry"/>
+  </collision>
+</xacro:macro>
+
+</include>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>simulation</name>
+  <version>0.1.0</version>
+  <description>Simulations and visualizations for airstand and free-flying robot</description>
+  <maintainer email="beschastnovigor@gmail.com">Igor Beschastnov</maintainer>
+  <license>MIT</license>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+
+  <!-- Additional packages-->
+  <depend>usb_cam</depend>
+  <depend>camera_calibration_parsers</depend>
+  <depend>camera_info_manager</depend>
+  <depend>launch_testing_ament_cmake</depend>
+  <depend>tf_transformations</depend>
+  <depend>cv_bridge</depend>
+  <depend>python-transforms3d-pip</depend>
+  <depend>joint_state_publisher_gui</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
