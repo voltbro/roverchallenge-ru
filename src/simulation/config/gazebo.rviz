@@ -26,7 +26,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -59,78 +59,19 @@ Visualization Manager:
           Value: false
         camera:
           Value: false
-        imu:
+        odom:
           Value: true
-        lidar_back:
-          Value: false
-        lidar_front:
-          Value: false
-        lidar_left:
-          Value: false
-        lidar_right:
-          Value: false
-        platform:
-          Value: false
-        platform/odom:
-          Value: false
-        platform_weight:
-          Value: false
-        prop_bl:
-          Value: false
-        prop_br:
-          Value: false
-        prop_fl:
-          Value: false
-        prop_fr:
-          Value: false
-        prop_lb:
-          Value: false
-        prop_lt:
-          Value: false
-        prop_rb:
-          Value: false
-        prop_rt:
-          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        platform/odom:
-          platform:
-            base:
-              base_weight:
-                {}
-              camera:
-                {}
-              imu:
-                {}
-              lidar_back:
-                {}
-              lidar_front:
-                {}
-              lidar_left:
-                {}
-              lidar_right:
-                {}
-              prop_bl:
-                {}
-              prop_br:
-                {}
-              prop_fl:
-                {}
-              prop_fr:
-                {}
-              prop_lb:
-                {}
-              prop_lt:
-                {}
-              prop_rb:
-                {}
-              prop_rt:
-                {}
-            platform_weight:
+        odom:
+          base:
+            base_weight:
+              {}
+            camera:
               {}
       Update Interval: 0
       Value: true
@@ -166,75 +107,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        imu:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        lidar_back:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        lidar_front:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        lidar_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        lidar_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        platform:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        platform_weight:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        prop_bl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_br:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_lb:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_lt:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_rb:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        prop_rt:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -280,7 +152,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /platform/odom
+        Value: /odom
       Value: true
     - Class: rviz_default_plugins/Image
       Enabled: true
@@ -435,7 +307,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: platform/odom
+    Fixed Frame: odom
     Frame Rate: 10
   Name: root
   Tools:

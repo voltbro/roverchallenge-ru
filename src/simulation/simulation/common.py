@@ -15,15 +15,18 @@ ROBOT_MODEL_PATH = MODELS_DIR / "rover" / "rover.urdf"
 
 def get_robot_state_publisher_generator(kwargs=None):
     def generate_robot_state_publisher(
-        context: LaunchContext, model_path: LaunchConfiguration
+        context: LaunchContext, model_path: LaunchConfiguration | Path
     ):
         nonlocal kwargs
 
-        model_path_str = context.perform_substitution(model_path)
+        if isinstance(model_path, Path):
+            model_path_str = str(model_path.resolve())
+        else:
+            model_path_str = context.perform_substitution(model_path)
         with open(model_path_str, "r") as xml_description:
             robot_description = xml_description.read()
 
-        parameters = [{"robot_description": robot_description, 'use_sim_time': True}]
+        parameters = [{"robot_description": robot_description, "use_sim_time": True}]
         if kwargs is not None:
             if "parameters" in kwargs:
                 parameters.extend(kwargs["parameters"])
@@ -36,7 +39,7 @@ def get_robot_state_publisher_generator(kwargs=None):
                 package="robot_state_publisher",
                 executable="robot_state_publisher",
                 parameters=parameters,
-                **kwargs
+                **kwargs,
             )
         ]
 

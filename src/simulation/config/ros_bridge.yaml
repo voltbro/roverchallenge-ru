@@ -20,57 +20,8 @@
 
 # ROBOT TOPICS
 
-### PROPERLLERS  BEGIN ###
-- ros_topic_name: "prop/fl/thrust"
-  gz_topic_name: "model/airstand/joint/prop_fl_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/fr/thrust"
-  gz_topic_name: "model/airstand/joint/prop_fr_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/bl/thrust"
-  gz_topic_name: "model/airstand/joint/prop_bl_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/br/thrust"
-  gz_topic_name: "model/airstand/joint/prop_br_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/rt/thrust"
-  gz_topic_name: "model/airstand/joint/prop_rt_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/rb/thrust"
-  gz_topic_name: "model/airstand/joint/prop_rb_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/lt/thrust"
-  gz_topic_name: "model/airstand/joint/prop_lt_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-- ros_topic_name: "prop/lb/thrust"
-  gz_topic_name: "model/airstand/joint/prop_lb_joint/cmd_thrust"
-  ros_type_name: "std_msgs/msg/Float64"
-  gz_type_name: "gz.msgs.Double"
-  direction: ROS_TO_GZ
-### PROPERLLERS END ###
-
-- ros_topic_name: "imu"
-  gz_topic_name: "imu"
-  ros_type_name: "sensor_msgs/msg/Imu"
-  gz_type_name: "gz.msgs.IMU"
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "platform/odom"
-  gz_topic_name: "platform/odom"
+- ros_topic_name: "odom"
+  gz_topic_name: "odom"
   ros_type_name: "nav_msgs/msg/Odometry"
   gz_type_name: "gz.msgs.Odometry"
   direction: GZ_TO_ROS
@@ -87,28 +38,8 @@
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
 
-### LIDAR END ###
-- ros_topic_name: "lidar_front"
-  gz_topic_name: "lidar_front"
+- ros_topic_name: "lidar"
+  gz_topic_name: "lidar"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
-
-- ros_topic_name: "lidar_back"
-  gz_topic_name: "lidar_back"
-  ros_type_name: "sensor_msgs/msg/LaserScan"
-  gz_type_name: "gz.msgs.LaserScan"
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "lidar_left"
-  gz_topic_name: "lidar_left"
-  ros_type_name: "sensor_msgs/msg/LaserScan"
-  gz_type_name: "gz.msgs.LaserScan"
-  direction: GZ_TO_ROS
-
-- ros_topic_name: "lidar_right"
-  gz_topic_name: "lidar_right"
-  ros_type_name: "sensor_msgs/msg/LaserScan"
-  gz_type_name: "gz.msgs.LaserScan"
-  direction: GZ_TO_ROS
-### LIDAR END ###
