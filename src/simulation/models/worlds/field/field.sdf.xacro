@@ -1,10 +1,26 @@
 <?xml version="1.0" ?>
 <sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.10">
-<world name="plane_world">
+<world name="field_world">
 
 <xacro:include filename="$(env MODELS_DIR)/common/plugins.xacro" />
 <xacro:include filename="$(env MODELS_DIR)/common/simple_light.xacro" />
-<xacro:include filename="$(env MODELS_DIR)/common/ground_plane.xacro" />
+
+<include>
+    <uri>file:/$(env MODELS_DIR)/objects/field</uri>
+    <pose>0 0 0 ${-pi/2} 0 0</pose>
+</include>
+
+<include>
+    <name>pole_1</name>
+    <uri>file:/$(env MODELS_DIR)/objects/marker</uri>
+    <pose>1 0 0 0 0 0</pose>
+</include>
+
+<include>
+    <name>pole_2</name>
+    <uri>file:/$(env MODELS_DIR)/objects/marker</uri>
+    <pose>0 1 0 0 0 0</pose>
+</include>
 
 <model name='rover'>
     <include>

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.10">
+  <model name="rc_terrain">
+    <pose>0 0 0 0 0 0</pose>
+    <static>true</static>
+    <link name="rc_terrain">
+
+      <xacro:macro name="terrain_stl">
+        <geometry>
+          <mesh>
+            <uri>file:/$(env MODELS_DIR)/objects/field/field-demo1.stl</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </xacro:macro>
+
+      <collision name="terrain_collision">
+        <xacro:terrain_stl/>
+      </collision>
+
+      <visual name="terrain_visual">
+        <xacro:terrain_stl/>
+        <material>
+          <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+          </script>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

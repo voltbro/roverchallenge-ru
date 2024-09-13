@@ -2,14 +2,15 @@
 <xacro:macro name="rover">
 
 <xacro:include filename="$(env MODELS_DIR)/common/utils.xacro" />
-<xacro:include filename="$(env MODELS_DIR)/rover/sslidar.xacro" />
+<xacro:include filename="sslidar.xacro" />
+<xacro:include filename="wheel.xacro" />
 
 <xacro:property name="robot_side_len" value="0.2" />
 <xacro:property name="robot_mass" value="2" />
 
 <link name="base">
     <visual name="base_visual">
-        <origin  xyz="0 0 ${-robot_side_len/2}" rpy="${pi / 2} 0 ${pi / 2}"/>
+        <origin  xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
             <box size="${robot_side_len} ${robot_side_len} ${robot_side_len}" />
         </geometry>
@@ -33,7 +34,7 @@
     </inertial>
     <visual name="base_visual">
         <geometry>
-            <sphere radius="0.08"/>
+            <sphere radius="${robot_side_len / 2 + 0.025}"/>
             <material name="red">
                 <color rgba="1.0 0 0 1.0"/>
             </material>
@@ -45,6 +46,8 @@
     <parent link="base"/>
     <child link="base_weight"/>
 </joint>
+
+<xacro:wheel index="0" xyz="1 0 0" axis="0 1 0"/>
 
 <!-- CAMERA BLOCK-->
 <link name="camera"></link>
@@ -83,6 +86,15 @@
         <odom_publish_frequency>20</odom_publish_frequency>
         <odom_topic>odom</odom_topic>
         <tf_topic>tf</tf_topic>
+  </plugin>
+</gazebo>
+
+<gazebo>
+    <plugin
+        filename="gz-sim-joint-state-publisher-system"
+        name="gz::sim::systems::JointStatePublisher">
+        <topic>joint_states</topic> <!--from <ros><remapping> -->
+        <joint_name>wheel_0_joint</joint_name>
   </plugin>
 </gazebo>
 
