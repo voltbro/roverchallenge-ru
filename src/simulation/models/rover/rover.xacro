@@ -47,8 +47,8 @@
     <child link="base_weight"/>
 </joint>
 
-<xacro:wheel index="0" xyz="1 -1 0" axis="0 0 1"/>
-<xacro:wheel index="1" xyz="-1 -1 0" axis="0 0 1"/>
+<xacro:wheel index="0" xyz="1 -1 0" axis="0 0 -1"/>
+<xacro:wheel index="1" xyz="-1 -1 0" axis="0 0 -1"/>
 <xacro:wheel index="2" xyz="1 1 0" axis="0 0 -1"/>
 <xacro:wheel index="3" xyz="-1 1 0" axis="0 0 -1"/>
 
@@ -105,11 +105,8 @@
 </gazebo>
 
 <gazebo>
-    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
-        <command_topic>cmd_vel</command_topic>
-
-        <update_rate>30</update_rate>
-        <num_wheel_pairs>2</num_wheel_pairs>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <topic>cmd_vel</topic>
 
         <left_joint>wheel_0_joint</left_joint>
         <right_joint>wheel_2_joint</right_joint>
@@ -120,16 +117,8 @@
         <wheel_separation>2.0</wheel_separation>
         <wheel_diameter>0.4</wheel_diameter>
 
-        <!-- limits -->
-        <max_wheel_torque>100</max_wheel_torque>
-        <max_wheel_acceleration>10.0</max_wheel_acceleration>
-
         <!-- ODOMETRY -->
-        <odometry_frame>odom</odometry_frame>
-        <robot_base_frame>base</robot_base_frame>
-        <publish_odom>false</publish_odom>
-        <publish_odom_tf>false</publish_odom_tf>
-        <publish_wheel_tf>false</publish_wheel_tf>
+        <odom_publish_frequency>0</odom_publish_frequency>
     </plugin>
 </gazebo>
 

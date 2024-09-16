@@ -25,7 +25,7 @@
 <model name='rover'>
     <include>
          <uri>file:/$(env MODELS_DIR)/rover/rover.urdf</uri>
-         <pose>0.0 0.0 0.3275 0.0 0 0.0</pose>
+         <pose>0.0 0.0 0.5 0.0 0 0.0</pose>
     </include>
 </model>
 
