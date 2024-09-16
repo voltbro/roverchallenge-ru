@@ -13,13 +13,13 @@
 <include>
     <name>pole_1</name>
     <uri>file:/$(env MODELS_DIR)/objects/marker</uri>
-    <pose>1 0 0 0 0 0</pose>
+    <pose>5 0 1 0 0 0</pose>
 </include>
 
 <include>
     <name>pole_2</name>
     <uri>file:/$(env MODELS_DIR)/objects/marker</uri>
-    <pose>0 1 0 0 0 0</pose>
+    <pose>0 5 1 0 0 0</pose>
 </include>
 
 <model name='rover'>

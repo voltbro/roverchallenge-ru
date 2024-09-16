@@ -17,7 +17,7 @@
     <geometry>
       <mesh>
         <uri>file:/$(env MODELS_DIR)/objects/marker/marker10.stl</uri>
-        <scale>1.0 1.0 1.0</scale>
+        <scale>1 1 1</scale>
       </mesh>
     </geometry>
     <material>
