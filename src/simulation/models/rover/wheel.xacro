@@ -1,5 +1,5 @@
 <include xmlns:xacro="http://www.ros.org/wiki/xacro">
-<xacro:macro name="wheel" params="index xyz axis">
+<xacro:macro name="wheel" params="index xyz axis diameter">
 
 <link name="wheel_${index}">
     <inertial>
@@ -8,12 +8,12 @@
     </inertial>
     <visual name="wheel_${index}_visual">
         <geometry>
-            <cylinder radius="0.4" length="0.2"/>
+            <cylinder radius="${diameter}" length="0.1"/>
         </geometry>
     </visual>
     <collision name='wheel_${index}_collision'>
         <geometry>
-            <cylinder radius="0.4" length="0.2"/>
+            <cylinder radius="${diameter}" length="0.1"/>
         </geometry>
     </collision>
 </link>

@@ -3,7 +3,7 @@ python := "/usr/bin/python3"
 sw_render := "false"
 sw_envs := if sw_render == "false" { "" } else { "LIBGL_ALWAYS_SOFTWARE=true MESA_GL_VERSION_OVERRIDE=3.3" }
 
-ros_packages := "gazebo_systems simulation stand_msgs stand_tracker"
+ros_packages := "gazebo_systems simulation controller"
 
 build_models_cmd := "${MODELS_DIR}/build_model.py"
 verbose_build_cmd := "VERBOSE=1 MAKE_JOBS=2 colcon build --symlink-install --parallel-workers 2 --event-handlers console_direct+ --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON"
