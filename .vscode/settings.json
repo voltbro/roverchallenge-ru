@@ -77,5 +77,6 @@
       "**/.vs": true
     },
     "C_Cpp.intelliSenseMemoryLimit": 2048,
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "/home/igor/Projects/roverchallenge-ru/src/gazebo_systems"
   }

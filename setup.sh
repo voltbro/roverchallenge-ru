@@ -65,6 +65,7 @@ function run_string() {
 export PYTHONPATH=${PROJECT_UTILS_ROOT}:$PYTHONPATH
 
 # Setup Gazebo
+export GZ_SIM_SYSTEM_PLUGIN_PATH=${GZ_SIM_SYSTEM_PLUGIN_PATH}:${SIM_DIR}/simulation
 export SDF_PATH=${SDF_PATH}:${MODELS_DIR}
 export DISPLAY=:0
 

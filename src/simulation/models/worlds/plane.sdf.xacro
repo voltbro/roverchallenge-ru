@@ -5,6 +5,7 @@
 <xacro:include filename="$(env MODELS_DIR)/common/plugins.xacro" />
 <xacro:include filename="$(env MODELS_DIR)/common/simple_light.xacro" />
 <xacro:include filename="$(env MODELS_DIR)/common/ground_plane.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/common/utils.xacro" />
 
 <model name='rover'>
     <include>
@@ -12,6 +13,17 @@
          <pose>0.0 0.0 0.5 0.0 0 0.0</pose>
     </include>
 </model>
+
+<plugin
+    filename="${gazebo_systems_lib_dir}/libDoorButtonSystem.so"
+    name="gz::sim::v8::systems::DoorButtonSystem">
+</plugin>
+<!--
+<plugin filename="gz-sim-python-system-loader-system" name="gz::sim::systems::PythonSystemLoader">
+    <module_name>systems/door.py</module_name>
+    <force>100</force>
+</plugin>
+-->
 
 </world>
 </sdf>

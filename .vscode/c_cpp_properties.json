@@ -4,7 +4,22 @@
             "name": "ROS",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/opt/ros/jazzy/include/**"
+                "/opt/ros/jazzy/include/**",
+                "/opt/ros/jazzy/opt/gz_cmake_vendor/include/gz/cmake3",
+                "/opt/ros/jazzy/opt/gz_common_vendor/include/gz/common5/",
+                "/opt/ros/jazzy/opt/gz_dartsim_vendor/include/",
+                "/opt/ros/jazzy/opt/gz_gui_vendor/include/gz/gui8",
+                "/opt/ros/jazzy/opt/gz_math_vendor/include/gz/math7",
+                "/opt/ros/jazzy/opt/gz_msgs_vendor/include/gz/msgs10",
+                "/opt/ros/jazzy/opt/gz_physics_vendor/include/gz/physics7",
+                "/opt/ros/jazzy/opt/gz_plugin_vendor/include/gz/plugin2/",
+                "/opt/ros/jazzy/opt/gz_rendering_vendor/include/gz/rendering8",
+                "/opt/ros/jazzy/opt/gz_sensors_vendor/include/gz/sensors8/",
+                "/opt/ros/jazzy/opt/gz_sim_vendor/include/gz/sim8/",
+                "/opt/ros/jazzy/opt/gz_transport_vendor/include/gz/transport13",
+                "/opt/ros/jazzy/opt/gz_utils_vendor/include/gz/utils2",
+                "/opt/ros/jazzy/opt/sdformat_vendor/include/gz/sdformat14",
+                "/usr/include/eigen3"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

@@ -15,20 +15,20 @@ find_package(gz-sim8 REQUIRED)
 set(GZ_SIM_VER ${gz-sim8_VERSION_MAJOR})
 message(STATUS "Compiling against Gazebo Harmonic")
 
-add_library(BasicSystem
+add_library(DoorButtonSystem
   SHARED
-  src/BasicSystem.cpp
+  src/DoorButtonSystem.cpp
 )
 
 target_include_directories(
-  BasicSystem PRIVATE include
+  DoorButtonSystem PRIVATE include
 )
 
-target_link_libraries(BasicSystem PRIVATE
+target_link_libraries(DoorButtonSystem PRIVATE
   gz-sim${GZ_SIM_VER}::gz-sim${GZ_SIM_VER})
 
 install(
-  TARGETS BasicSystem
+  TARGETS DoorButtonSystem
   DESTINATION lib/${PROJECT_NAME}
 )
 

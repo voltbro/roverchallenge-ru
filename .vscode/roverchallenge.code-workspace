@@ -26,6 +26,11 @@
 		"files.associations": {
 			"*.service.m4": "systemd-unit-file",
 			"*.target.m4": "systemd-unit-file",
+			"*.xacro": "xml",
+			"*.zx": "javascript",
+			"*.sdf": "xml",
+			"*.libjsonnet": "jsonnet",
+			"*.urdf": "xml",
 			"*.common": "c",
 			"canard.h": "c",
 			"*.dsdl": "dsdl",
@@ -97,7 +102,19 @@
 			"cinttypes": "cpp",
 			"typeindex": "cpp",
 			"typeinfo": "cpp",
-			"variant": "cpp"
+			"variant": "cpp",
+			"any": "cpp",
+			"charconv": "cpp",
+			"compare": "cpp",
+			"concepts": "cpp",
+			"source_location": "cpp",
+			"hash_map": "cpp",
+			"hash_set": "cpp",
+			"format": "cpp",
+			"numbers": "cpp",
+			"semaphore": "cpp",
+			"span": "cpp",
+			"stop_token": "cpp"
 		},
 		"C_Cpp.intelliSenseMemoryLimit": 2048,
 		"[python]": {
