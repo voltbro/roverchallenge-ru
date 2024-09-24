@@ -14,11 +14,19 @@
     </include>
 </model>
 
+<include>
+    <name>door</name>
+    <uri>file:/$(env MODELS_DIR)/objects/simple_door</uri>
+    <pose>5 0 1 0 0 0</pose>
+</include>
+
 <plugin
     filename="${gazebo_systems_lib_dir}/libDoorButtonSystem.so"
     name="gazebo_systems::DoorButtonSystem">
-    <hinge_joint>a</hinge_joint>
-    <button_joint>b</button_joint>
+    <hinge_joint>door_to_door_base_joint</hinge_joint>
+    <button_joint>button_to_door_base_joint</button_joint>
+    <percentage_pressed>50</percentage_pressed>
+    <opening_force>20</opening_force>
 </plugin>
 <!--
 <plugin filename="gz-sim-python-system-loader-system" name="gz::sim::systems::PythonSystemLoader">

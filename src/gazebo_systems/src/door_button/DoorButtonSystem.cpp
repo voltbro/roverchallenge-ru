@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <string>
 
@@ -19,92 +20,88 @@ using namespace systems;
 
 using namespace gazebo_systems;
 
-void DoorButtonSystem::real_configure(const gz::sim::EntityComponentManager &_ecm) {
+void DoorButtonSystem::post_configure(EntityComponentManager &_ecm) {
     if (is_configured) {
         return;
     }
     is_configured = true;
 
-    auto all = _ecm.Entities();
-    auto vertices = all.Vertices();
-    for (auto vert: vertices) {
-        const Entity& ent = vert.second.get().Data();
-        Model model = gz::sim::Model(ent);
-        std::cout << model.Name(_ecm) << std::endl;
-    }
+    hinge_joint = Joint(_ecm.EntityByComponents(components::Name(hinge_joint_name)));
+    button_joint = Joint(_ecm.EntityByComponents(components::Name(button_joint_name)));
+    std::cout << "Hinge: " << hinge_joint.Name(_ecm).value() << std::endl;
+    std::cout << "Button: " << button_joint.Name(_ecm).value() << std::endl;
+
+    sdf::JointAxis button_axis = button_joint.Axis(_ecm).value()[0];
+    const_cast<double&>(button_lower) = button_axis.Lower();
+    const_cast<double&>(button_upper) = button_axis.Upper();
+    button_joint.EnablePositionCheck(_ecm, true);
+    std::cout << "Button limits: " << button_lower << " " << button_upper << std::endl;
 }
 
-void DoorButtonSystem::PostUpdate(
-    const gz::sim::UpdateInfo &_info,
-    const gz::sim::EntityComponentManager &_ecm
+void DoorButtonSystem::PreUpdate(
+    const UpdateInfo &_info,
+    EntityComponentManager &_ecm
 ) {
     if (!is_configured) {
-        real_configure(_ecm);
+        post_configure(_ecm);
     }
-    if (_info.paused || _info.iterations % 100 != 0) {
+    if (_info.paused) {
         return;
     }
 
+    auto button_pos = button_joint.Position(_ecm).value()[0];
+    double button_move = button_pos - button_lower;
+    double part_pressed = std::clamp(button_move / button_upper, 0.0, 1.0);
+    is_pressed = (part_pressed * 100) >= percentage_pressed;
+    if (is_pressed) {
+        open_door(_ecm);
+    }
+    else {
+        close_door(_ecm);
+    }
+
+    if (_info.iterations % 100 == 0) {
+        std::cout << button_pos << " " << button_move << " " << part_pressed << " " << is_pressed << std::endl;
+    }
+}
+
+void DoorButtonSystem::open_door(EntityComponentManager &_ecm) {
+    hinge_joint.SetForce(_ecm, opening_forces);
+}
+
+void DoorButtonSystem::close_door(EntityComponentManager &_ecm) {
+    hinge_joint.SetForce(_ecm, closing_forces);
 }
 
 void DoorButtonSystem::Configure(
-    const gz::sim::Entity &_entity,
+    const Entity &_entity,
     const std::shared_ptr<const sdf::Element> &_sdf,
-    gz::sim::EntityComponentManager &_ecm,
-    gz::sim::EventManager& _event_mgr
+    EntityComponentManager &_ecm,
+    EventManager& _event_mgr
 ) {
-    world = _entity;
+    world = Model(_entity);
+
     const_cast<std::string&>(hinge_joint_name) = _sdf->Get<std::string>("hinge_joint");
-    const_cast<std::string&>(button_joint_name) = _sdf->Get<std::string>("button_joint");
     std::cout << "hinge_joint_name: <" << hinge_joint_name << ">" << std::endl;
+
+    const_cast<std::string&>(button_joint_name) = _sdf->Get<std::string>("button_joint");
     std::cout << "button_joint_name: <" << button_joint_name << ">" << std::endl;
+
+    std::pair<double, bool> force_result_pair = _sdf->Get<double>("opening_force", DEFAULT_DOOR_FORCE);
+    const_cast<double&>(opening_force) = std::get<double>(force_result_pair);
+    std::cout << "opening_force: <" << opening_force << ">" << std::endl;
+
+    std::pair<double, bool> pressed_result_pair = _sdf->Get<double>("percentage_pressed", DEFAULT_PERCENTAGE_PRESSED);
+    const_cast<double&>(percentage_pressed) = std::get<double>(pressed_result_pair);
+    std::cout << "percentage_pressed: <" << percentage_pressed << ">" << std::endl;
+
+    const_cast<std::vector<double>&>(opening_forces)[0] = opening_force;
+    const_cast<std::vector<double>&>(closing_forces)[0] = -opening_force;
 }
 
 GZ_ADD_PLUGIN(
     DoorButtonSystem,
     gz::sim::System,
     DoorButtonSystem::ISystemConfigure,
-    DoorButtonSystem::ISystemPostUpdate
+    DoorButtonSystem::ISystemPreUpdate
 )
-
-/*
-//gzlog << "ros_gz_example_gazebo::DoorButtonSystem::PostUpdate" << std::endl;
-std::cout << "Hello from plugin" << std::endl;
-for (auto& link: model.Links(_ecm)) {
-    std::cout << worldPose(link, _ecm) << " ;;; ";
-}
-std::cout << std::endl;
-*/
-
-/*
-auto first_element = _sdf->GetFirstElement();
-std::cout << _sdf->OriginalVersion() << std::endl;
-std::cout << (first_element ? 'y' : 'n') << std::endl;
-for (sdf::ElementPtr elem_ptr = first_element; elem_ptr; elem_ptr = elem_ptr->GetNextElement()) {
-    std::cout << "here" << std::endl;
-    std::cout << elem_ptr->GetName() << std::endl;
-}
-
-auto linkName = _sdf->Get<std::string>("rover");
-std::cout << linkName << std::endl;
-door = _ecm.EntityByComponents(
-    components::ParentEntity(_entity),
-    components::Name(linkName),
-    components::Link()
-);
-std::cout << +door << std::endl;
-*/
-
-
-//auto door_data =  _ecm.ComponentData<gz::sim::components::Pose>(door);
-//std::cout << door_data.value() << std::endl;
-/*door = model.LinkByName(_ecm, "rover::rover::base");
-std::cout << +door << std::endl;
-std::cout << model.Name(_ecm) << std::endl;
-for (auto inner_model_id: model.Models(_ecm)) {
-    auto inner_model = gz::sim::Model(inner_model_id);
-    std::cout << inner_model.Name(_ecm) << std::endl;
-}*/
-
-//button_joint = model.JointByName(_ecm, "button_joint");
-//hinge_joint = model.JointByName(_ecm, "hinge_joint");

@@ -7,15 +7,17 @@
 
 namespace gazebo_systems
 {
+constexpr double DEFAULT_DOOR_FORCE = 10.0;
+constexpr double DEFAULT_PERCENTAGE_PRESSED = 80.0;
+
 class GZ_SIM_VISIBLE DoorButtonSystem:
     public gz::sim::System,
-    public gz::sim::ISystemPostUpdate,
+    public gz::sim::ISystemPreUpdate,
     public gz::sim::ISystemConfigure {
-
 public:
-    void PostUpdate(
+    void PreUpdate(
         const gz::sim::UpdateInfo &_info,
-        const gz::sim::EntityComponentManager &_ecm
+        gz::sim::EntityComponentManager &_ecm
     ) override;
 
     virtual void Configure(
@@ -24,18 +26,28 @@ public:
         gz::sim::EntityComponentManager& _ecm,
         gz::sim::EventManager& _event_mgr
     ) override;
-    void open_door();
-    void close_door();
+
 
 private:
-    void real_configure(const gz::sim::EntityComponentManager &_ecm);
+    void post_configure(gz::sim::EntityComponentManager &_ecm);
+    void open_door(gz::sim::EntityComponentManager &_ecm);
+    void close_door(gz::sim::EntityComponentManager &_ecm);
 
     bool is_configured = false;
-    gz::sim::Entity world;
-    gz::sim::Entity door;
-    const std::string hinge_joint_name;
-    const std::string button_joint_name;
-    gz::sim::Entity button_joint;
-    gz::sim::Entity hinge_joint;
+    gz::sim::Model world;
+
+    // will be setup in "Configure" and "post_configure" through const_cast
+    const std::string hinge_joint_name = "";
+    const std::string button_joint_name = "";
+    const double button_upper = 0;
+    const double button_lower = 0;
+    const double opening_force = DEFAULT_DOOR_FORCE;
+    const double percentage_pressed = DEFAULT_PERCENTAGE_PRESSED;
+    const std::vector<double> opening_forces = {DEFAULT_DOOR_FORCE};
+    const std::vector<double> closing_forces = {-DEFAULT_DOOR_FORCE};
+
+    gz::sim::Joint button_joint;
+    gz::sim::Joint hinge_joint;
+    bool is_pressed = false;
 };
 }
