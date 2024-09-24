@@ -5,11 +5,7 @@
 #include <gz/sim/System.hh>
 #include <gz/sim/Joint.hh>
 
-namespace gz
-{
-namespace sim
-{
-namespace systems
+namespace gazebo_systems
 {
 class GZ_SIM_VISIBLE DoorButtonSystem:
     public gz::sim::System,
@@ -37,10 +33,9 @@ private:
     bool is_configured = false;
     gz::sim::Entity world;
     gz::sim::Entity door;
+    const std::string hinge_joint_name;
+    const std::string button_joint_name;
     gz::sim::Entity button_joint;
     gz::sim::Entity hinge_joint;
-
 };
-}
-}
 }

@@ -16,7 +16,9 @@
 
 <plugin
     filename="${gazebo_systems_lib_dir}/libDoorButtonSystem.so"
-    name="gz::sim::v8::systems::DoorButtonSystem">
+    name="gazebo_systems::DoorButtonSystem">
+    <hinge_joint>a</hinge_joint>
+    <button_joint>b</button_joint>
 </plugin>
 <!--
 <plugin filename="gz-sim-python-system-loader-system" name="gz::sim::systems::PythonSystemLoader">

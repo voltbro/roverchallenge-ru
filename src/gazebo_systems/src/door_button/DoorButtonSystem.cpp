@@ -10,11 +10,14 @@
 #include <gz/sim/components/Pose.hh>
 #include <gz/plugin/Register.hh>
 
-#include "gazebo_systems/DoorButtonSystem.h"
+#include "DoorButtonSystem.h"
 
+// Recommended by gazebo docs
 using namespace gz;
 using namespace sim;
 using namespace systems;
+
+using namespace gazebo_systems;
 
 void DoorButtonSystem::real_configure(const gz::sim::EntityComponentManager &_ecm) {
     if (is_configured) {
@@ -24,8 +27,8 @@ void DoorButtonSystem::real_configure(const gz::sim::EntityComponentManager &_ec
 
     auto all = _ecm.Entities();
     auto vertices = all.Vertices();
-    for (auto obj: vertices) {
-        const Entity& ent = obj.second.get().Data();
+    for (auto vert: vertices) {
+        const Entity& ent = vert.second.get().Data();
         Model model = gz::sim::Model(ent);
         std::cout << model.Name(_ecm) << std::endl;
     }
@@ -51,6 +54,10 @@ void DoorButtonSystem::Configure(
     gz::sim::EventManager& _event_mgr
 ) {
     world = _entity;
+    const_cast<std::string&>(hinge_joint_name) = _sdf->Get<std::string>("hinge_joint");
+    const_cast<std::string&>(button_joint_name) = _sdf->Get<std::string>("button_joint");
+    std::cout << "hinge_joint_name: <" << hinge_joint_name << ">" << std::endl;
+    std::cout << "button_joint_name: <" << button_joint_name << ">" << std::endl;
 }
 
 GZ_ADD_PLUGIN(
