@@ -26,6 +26,12 @@
     <pose>0 5 1 0 0 0</pose>
 </include>
 
+<include>
+    <name>rotator_wall</name>
+    <uri>file:/$(env MODELS_DIR)/objects/test/rotator_with_base</uri>
+    <pose>0 -5 1 0 0 0</pose>
+</include>
+
 <!--
 <plugin
     filename="${gazebo_systems_lib_dir}/libDoorButtonSystem.so"
