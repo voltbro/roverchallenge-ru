@@ -4,55 +4,11 @@
 <pose>0 0 0 0 0 0</pose>
 <static>false</static>
 
+<xacro:include filename="$(env MODELS_DIR)/common/utils.xacro" />
 <xacro:property name="base_width" value="1" />
+<xacro:cuboid name="door_base" a="4" b="${base_width}" c="2" weight="10000" is_kinematic="true"/>
 
-<link name="door_base">
-  <self_collide>false</self_collide>
-  <kinematic>true</kinematic>
-  <pose>0 0 0 0 0 0</pose>
-  <xacro:macro name="door_base_form">
-    <geometry>
-      <box><size>4 ${base_width} 2</size></box>
-    </geometry>
-  </xacro:macro>
-  <collision name="door_base_collision">
-    <xacro:door_base_form/>
-  </collision>
-  <visual name="door_base_visual">
-    <xacro:door_base_form/>
-    <material>
-      <script>
-          <uri>file://media/materials/scripts/gazebo.material</uri>
-          <name>Gazebo/Yellow</name>
-      </script>
-    </material>
-  </visual>
-  <inertial>
-    <mass>10000</mass>
-  </inertial>
-</link>
-
-<link name="door">
-  <self_collide>false</self_collide>
-  <pose>0 -1.15 0 0 0 ${-pi/2}</pose>
-  <xacro:macro name="door_form">
-    <geometry>
-      <box><size>1 0.1 1.8</size></box>
-    </geometry>
-  </xacro:macro>
-  <collision name="door_collision">
-    <xacro:door_form/>
-  </collision>
-  <visual name="door_visual">
-    <xacro:door_form/>
-    <material>
-      <script>
-          <uri>file://media/materials/scripts/gazebo.material</uri>
-          <name>Gazebo/Red</name>
-      </script>
-    </material>
-  </visual>
-</link>
+<xacro:cuboid name="door" pose="0 -1.15 0 0 0 ${-pi/2}" a="1" b="0.1" c="1.8" weight="5" color="Red"/>
 
 <joint name="door_to_door_base_joint" type="revolute">
   <parent>door_base</parent>

@@ -5,15 +5,37 @@
   value="$(env PROJECT_ROOT)/install/gazebo_systems/lib/gazebo_systems"
 />
 
-<xacro:macro name="primitive" params="name *origin *geometry">
-  <visual name="${name}">
-    <xacro:insert_block name="origin"/>
-    <xacro:insert_block name="geometry"/>
-  </visual>
-  <collision name="${name}">
-    <xacro:insert_block name="origin"/>
-    <xacro:insert_block name="geometry"/>
+<xacro:macro name="cuboid_form" params="a b c">
+    <geometry>
+      <box><size>${a} ${b} ${c}</size></box>
+    </geometry>
+</xacro:macro>
+<xacro:macro name="cuboid" params="name a b c weight pose:='0 0 0 0 0 0' color:=Yellow is_kinematic:=false self_collide:=false">
+<link name="${name}">
+  <self_collide>${self_collide}</self_collide>
+  <kinematic>${is_kinematic}</kinematic>
+  <pose>${pose}</pose>
+  <collision name="${name}_collision">
+    <xacro:cuboid_form a="${a}" b="${b}" c="${c}"/>
   </collision>
+  <visual name="${name}_visual">
+    <xacro:cuboid_form a="${a}" b="${b}" c="${c}"/>
+    <material>
+      <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/${color}</name>
+      </script>
+    </material>
+  </visual>
+  <inertial>
+    <mass>${weight}</mass>
+    <inertia>
+      <ixx>${weight * (a**2 + c**2) / 12}</ixx>
+      <iyy>${weight * (b**2 + c**2) / 12}</iyy>
+      <izz>${weight * (b**2 + a**2) / 12}</izz>
+    </inertia>
+  </inertial>
+</link>
 </xacro:macro>
 
 </include>
