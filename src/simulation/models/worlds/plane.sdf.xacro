@@ -32,16 +32,14 @@
     <pose>0 -5 1 0 0 0</pose>
 </include>
 
-<!--
 <plugin
-    filename="${gazebo_systems_lib_dir}/libDoorButtonSystem.so"
-    name="gazebo_systems::DoorButtonSystem">
+    filename="${gazebo_systems_lib_dir}/libTriggerSystems.so"
+    name="gazebo_systems::DoorButton">
     <hinge_joint>door_to_door_base_joint</hinge_joint>
-    <button_joint>button_to_door_base_joint</button_joint>
-    <percentage_pressed>50</percentage_pressed>
+    <trigger_joint>tumbler_to_frame_joint</trigger_joint>
+    <percentage_activated>50</percentage_activated>
     <opening_force>20</opening_force>
 </plugin>
--->
 
 </world>
 </sdf>
