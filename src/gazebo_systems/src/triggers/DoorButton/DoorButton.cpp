@@ -18,7 +18,7 @@ using namespace gz;
 using namespace sim;
 using namespace systems;
 
-using namespace gazebo_systems;
+using namespace trigger_systems;
 
 void DoorButton::post_configure(EntityComponentManager &_ecm) {
     BaseJointTriggerSystem::post_configure(_ecm);
@@ -47,10 +47,12 @@ void DoorButton::Configure(
 }
 
 void DoorButton::on_activation(EntityComponentManager &_ecm) {
+    std::cout << "Activation" << std::endl;
     hinge_joint.SetForce(_ecm, opening_forces);
 }
 
 void DoorButton::on_deactivation(EntityComponentManager &_ecm) {
+    std::cout << "Deactivation" << std::endl;
     hinge_joint.SetForce(_ecm, closing_forces);
 }
 

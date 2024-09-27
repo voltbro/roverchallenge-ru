@@ -34,11 +34,12 @@
 
 <plugin
     filename="${gazebo_systems_lib_dir}/libTriggerSystems.so"
-    name="gazebo_systems::DoorButton">
+    name="trigger_systems::DoorButton">
     <hinge_joint>door_to_door_base_joint</hinge_joint>
-    <trigger_joint>tumbler_to_frame_joint</trigger_joint>
+    <trigger_joint>button_to_door_base_joint</trigger_joint>
     <percentage_activated>50</percentage_activated>
-    <opening_force>20</opening_force>
+    <opening_force>800</opening_force>
+    <is_oneshot>true</is_oneshot>
 </plugin>
 
 </world>

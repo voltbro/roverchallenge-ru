@@ -4,7 +4,7 @@
 
 #include "../BaseJointTriggerSystem.h"
 
-namespace gazebo_systems
+namespace trigger_systems
 {
 constexpr double DEFAULT_DOOR_FORCE = 10.0;
 
