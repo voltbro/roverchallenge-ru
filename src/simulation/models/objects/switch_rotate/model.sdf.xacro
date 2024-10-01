@@ -3,6 +3,7 @@
 <model name="rotating_switch">
 
 <link name="frame">
+  <self_collide>false</self_collide>
   <visual name="frame_visual">
     <geometry>
       <mesh>
@@ -20,6 +21,7 @@
 </link>
 
 <link name="rotator">
+    <self_collide>false</self_collide>
     <pose>0 0 -0.004 0 0 0</pose>
     <xacro:macro name="rotator_stl">
         <geometry>

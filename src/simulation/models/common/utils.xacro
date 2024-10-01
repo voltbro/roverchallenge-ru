@@ -10,6 +10,18 @@
       <box><size>${a} ${b} ${c}</size></box>
     </geometry>
 </xacro:macro>
+<xacro:macro name="cuboid_inertia" params="weight a b c pose:='0 0 0 0 0 0'">
+  <inertial>
+    <pose>${pose}</pose>
+    <mass>${weight}</mass>
+    <inertia>
+      <ixx>${weight * (a**2 + c**2) / 12}</ixx>
+      <iyy>${weight * (b**2 + c**2) / 12}</iyy>
+      <izz>${weight * (b**2 + a**2) / 12}</izz>
+    </inertia>
+  </inertial>
+</xacro:macro>
+
 <xacro:macro name="cuboid" params="name a b c weight pose:='0 0 0 0 0 0' color:=Yellow is_kinematic:=false self_collide:=false">
 <link name="${name}">
   <self_collide>${self_collide}</self_collide>
@@ -27,14 +39,7 @@
       </script>
     </material>
   </visual>
-  <inertial>
-    <mass>${weight}</mass>
-    <inertia>
-      <ixx>${weight * (a**2 + c**2) / 12}</ixx>
-      <iyy>${weight * (b**2 + c**2) / 12}</iyy>
-      <izz>${weight * (b**2 + a**2) / 12}</izz>
-    </inertia>
-  </inertial>
+  <xacro:cuboid_inertia weight="${weight}" a="${a}" b="${b}" c="${c}"/>
 </link>
 </xacro:macro>
 

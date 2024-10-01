@@ -42,5 +42,16 @@
     <is_oneshot>true</is_oneshot>
 </plugin>
 
+<!-- TESTS -->
+<include>
+    <uri>file:/$(env MODELS_DIR)/objects/garage-inter</uri>
+    <pose>-5 0 0 0 0 0</pose>
+</include>
+<joint name="garage_to_world" type="fixed">
+    <parent>world</parent>
+    <child>garage::garage</child>
+</joint>
+
+
 </world>
 </sdf>

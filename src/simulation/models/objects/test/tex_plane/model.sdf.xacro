@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.10">
+<model name="tex_plane">
+<pose>0 0 0 0 0 0</pose>
+<static>true</static>
+
+<link name="marker_image">
+  <visual name="marker_image_visual">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <plane>
+        <size>1 1</size>
+      </plane>
+    </geometry>
+    <material>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>1 0.8 0.8 1</specular>
+      <pbr>
+        <metal>
+          <albedo_map>supply-texture.png</albedo_map>
+          <normal_map>supply-texture.png</normal_map>
+        </metal>
+      </pbr>
+    </material>
+  </visual>
+</link>
+
+</model>
+</sdf>
