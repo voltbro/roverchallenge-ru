@@ -25,6 +25,7 @@ protected:
     // will be setup in "Configure" and "post_configure" through const_cast
     const std::string hinge_joint_name = "";
     const double opening_force = DEFAULT_DOOR_FORCE;
+    const double closing_force = -DEFAULT_DOOR_FORCE;
     const std::vector<double> opening_forces = {DEFAULT_DOOR_FORCE};
     const std::vector<double> closing_forces = {-DEFAULT_DOOR_FORCE};
 

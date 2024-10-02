@@ -114,7 +114,8 @@
 			"numbers": "cpp",
 			"semaphore": "cpp",
 			"span": "cpp",
-			"stop_token": "cpp"
+			"stop_token": "cpp",
+			"stdfloat": "cpp"
 		},
 		"C_Cpp.intelliSenseMemoryLimit": 2048,
 		"[python]": {

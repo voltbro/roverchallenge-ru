@@ -7,6 +7,7 @@
 namespace trigger_systems
 {
 constexpr double DEFAULT_PERCENTAGE_ACTIVATED = 80.0;
+constexpr std::string_view DEFAULT_PLUGIN_NAME = "trigger_system";
 
 class GZ_SIM_VISIBLE BaseJointTriggerSystem:
     public gz::sim::System,
@@ -43,6 +44,8 @@ private:
     bool _is_activated = false;
     bool _state = false;
 protected:
+    const std::string plugin_name = {DEFAULT_PLUGIN_NAME.begin(), DEFAULT_PLUGIN_NAME.end()};
+
     double current_percentage() {
         return _current_percentage;
     }

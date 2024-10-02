@@ -12,6 +12,7 @@
 #include <gz/plugin/Register.hh>
 
 #include "DoorButton.h"
+#include <common.hpp>
 
 // Recommended by gazebo docs
 using namespace gz;
@@ -24,7 +25,7 @@ void DoorButton::post_configure(EntityComponentManager &_ecm) {
     BaseJointTriggerSystem::post_configure(_ecm);
 
     hinge_joint = Joint(_ecm.EntityByComponents(components::Name(hinge_joint_name)));
-    std::cout << "Hinge: " << hinge_joint.Name(_ecm).value() << std::endl;
+    NAMED_LOG << "Hinge: " << hinge_joint.Name(_ecm).value();
 }
 
 void DoorButton::Configure(
@@ -36,23 +37,27 @@ void DoorButton::Configure(
     BaseJointTriggerSystem::Configure(_entity, _sdf, _ecm, _event_mgr);
 
     const_cast<std::string&>(hinge_joint_name) = _sdf->Get<std::string>("hinge_joint");
-    std::cout << "hinge_joint_name: <" << hinge_joint_name << ">" << std::endl;
+    NAMED_LOG << "hinge_joint_name: <" << hinge_joint_name << ">";
 
-    std::pair<double, bool> force_result_pair = _sdf->Get<double>("opening_force", DEFAULT_DOOR_FORCE);
-    const_cast<double&>(opening_force) = std::get<double>(force_result_pair);
-    std::cout << "opening_force: <" << opening_force << ">" << std::endl;
+    std::pair<double, bool> opening_force_result_pair = _sdf->Get<double>("opening_force", DEFAULT_DOOR_FORCE);
+    const_cast<double&>(opening_force) = std::get<double>(opening_force_result_pair);
+    NAMED_LOG << "opening_force: <" << opening_force << ">";
+
+    std::pair<double, bool> closing_force_result_pair = _sdf->Get<double>("closing_force", -DEFAULT_DOOR_FORCE);
+    const_cast<double&>(closing_force) = std::get<double>(closing_force_result_pair);
+    NAMED_LOG << "closing_force: <" << closing_force << ">";
 
     const_cast<std::vector<double>&>(opening_forces)[0] = opening_force;
-    const_cast<std::vector<double>&>(closing_forces)[0] = -opening_force;
+    const_cast<std::vector<double>&>(closing_forces)[0] = closing_force;
 }
 
 void DoorButton::on_activation(EntityComponentManager &_ecm) {
-    std::cout << "Activation" << std::endl;
+    NAMED_LOG << "Activation";
     hinge_joint.SetForce(_ecm, opening_forces);
 }
 
 void DoorButton::on_deactivation(EntityComponentManager &_ecm) {
-    std::cout << "Deactivation" << std::endl;
+    NAMED_LOG << "Deactivation";
     hinge_joint.SetForce(_ecm, closing_forces);
 }
 

@@ -1,0 +1,74 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="button" params="name_prefix:=''">
+
+<link name="${name_prefix}frame">
+    <self_collide>false</self_collide>
+    <xacro:macro name="frame_stl">
+        <geometry>
+          <mesh>
+            <uri>file:/$(env MODELS_DIR)/objects/button/04-em-base.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </xacro:macro>
+      <visual name="frame_visual">
+        <xacro:frame_stl/>
+        <material>
+          <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+          </script>
+        </material>
+      </visual>
+</link>
+
+<link name="${name_prefix}button">
+    <self_collide>false</self_collide>
+    <pose>0 0 0.04 0 0 0</pose>
+    <xacro:macro name="button_stl">
+        <geometry>
+          <mesh>
+            <uri>file:/$(env MODELS_DIR)/objects/button/04-em-button.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </xacro:macro>
+      <collision name="button_collision">
+        <xacro:button_stl/>
+      </collision>
+      <visual name="button_visual">
+        <xacro:button_stl/>
+        <material>
+          <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+          </script>
+        </material>
+      </visual>
+</link>
+
+<joint name="${name_prefix}button_to_frame_joint" type="prismatic">
+    <parent>${name_prefix}frame</parent>
+    <child>${name_prefix}button</child>
+    <pose>0 0 0 0 0 0</pose>
+    <axis>
+      <xyz>0 0 -1</xyz>
+      <limit>
+        <lower>0</lower>
+        <upper>0.02</upper>
+      </limit>
+      <dynamics>
+        <damping>10</damping>
+        <spring_stiffness>100</spring_stiffness>
+        <spring_reference>0</spring_reference>
+      </dynamics>
+    </axis>
+    <physics>
+      <ode>
+        <cfm_damping>1</cfm_damping>
+      </ode>
+    </physics>
+</joint>
+
+</xacro:macro>
+</include>

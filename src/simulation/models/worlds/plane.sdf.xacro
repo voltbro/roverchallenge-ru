@@ -32,17 +32,6 @@
     <pose>0 -5 1 0 0 0</pose>
 </include>
 
-<plugin
-    filename="${gazebo_systems_lib_dir}/libTriggerSystems.so"
-    name="trigger_systems::DoorButton">
-    <hinge_joint>door_to_door_base_joint</hinge_joint>
-    <trigger_joint>button_to_door_base_joint</trigger_joint>
-    <percentage_activated>50</percentage_activated>
-    <opening_force>800</opening_force>
-    <is_oneshot>true</is_oneshot>
-</plugin>
-
-<!-- TESTS -->
 <include>
     <uri>file:/$(env MODELS_DIR)/objects/garage-inter</uri>
     <pose>-5 0 0 0 0 0</pose>
@@ -52,6 +41,27 @@
     <child>garage::garage</child>
 </joint>
 
+<xacro:macro
+    name="garage_door_trigger"
+    params="name force"
+>
+    <plugin
+        filename="${gazebo_systems_lib_dir}/libTriggerSystems.so"
+        name="trigger_systems::DoorButton">
+        <hinge_joint>garage_door_joint</hinge_joint>
+        <trigger_joint>${name}_button_to_frame_joint</trigger_joint>
+        <percentage_activated>50</percentage_activated>
+        <opening_force>${force}</opening_force>
+        <closing_force>0</closing_force>
+        <is_oneshot>true</is_oneshot>
+        <log_name>${name}</log_name>
+    </plugin>
+</xacro:macro>
+
+<xacro:garage_door_trigger name="outer_open" force="5000"/>
+<xacro:garage_door_trigger name="outer_close" force="-5000"/>
+<xacro:garage_door_trigger name="inner_open" force="5000"/>
+<xacro:garage_door_trigger name="inner_close" force="-5000"/>
 
 </world>
 </sdf>
