@@ -32,11 +32,11 @@
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
-      </xacro:macro>
-      <collision name="button_collision">
+    </xacro:macro>
+    <collision name="button_collision">
         <xacro:button_stl/>
-      </collision>
-      <visual name="button_visual">
+    </collision>
+    <visual name="button_visual">
         <xacro:button_stl/>
         <material>
           <script>
@@ -44,7 +44,7 @@
               <name>Gazebo/Red</name>
           </script>
         </material>
-      </visual>
+    </visual>
 </link>
 
 <joint name="${name_prefix}button_to_frame_joint" type="prismatic">

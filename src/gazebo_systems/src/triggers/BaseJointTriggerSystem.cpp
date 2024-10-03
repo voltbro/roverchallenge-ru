@@ -11,7 +11,6 @@
 #include <gz/sim/components/Pose.hh>
 
 #include "BaseJointTriggerSystem.h"
-#include "common.hpp"
 
 // Recommended by gazebo docs
 using namespace gz;
@@ -27,13 +26,13 @@ void BaseJointTriggerSystem::post_configure(EntityComponentManager &_ecm) {
     is_configured = true;
 
     const_cast<Joint&>(trigger_joint) = Joint(_ecm.EntityByComponents(components::Name(trigger_joint_name)));
-    NAMED_LOG << "Trigger: " << trigger_joint.Name(_ecm).value();
+    log() << "Trigger: " << trigger_joint.Name(_ecm).value() << END_LOG;
 
     sdf::JointAxis trigger_axis = trigger_joint.Axis(_ecm).value()[0];
     const_cast<double&>(trigger_lower) = trigger_axis.Lower();
     const_cast<double&>(trigger_upper) = trigger_axis.Upper();
     trigger_joint.EnablePositionCheck(_ecm, true);
-    NAMED_LOG << "Trigger limits: " << trigger_lower << " " << trigger_upper;
+    log() << "Trigger limits: " << trigger_lower << " " << trigger_upper << END_LOG;
 }
 
 void BaseJointTriggerSystem::PreUpdate(
@@ -66,7 +65,7 @@ void BaseJointTriggerSystem::PreUpdate(
     }
 
     if (_info.iterations % 100 == 0) {
-        NAMED_LOG << trigger_pos << " " << trigger_move << " " << part_pressed << " " << _is_activated;
+        log() << trigger_pos << " " << trigger_move << " " << part_pressed << " " << _is_activated << END_LOG;
     }
 }
 
@@ -78,20 +77,24 @@ void BaseJointTriggerSystem::Configure(
 ) {
     world = Model(_entity);
 
+    std::pair<bool, bool> do_log_pair = _sdf->Get<bool>("do_log", false);
+    const_cast<bool&>(do_log) = std::get<0>(do_log_pair);
+    std::cout << "[" << plugin_name << "] \"" << (do_log ? "log" : "no log") << "\"" << std::endl;
+
     std::pair<std::string, bool> name_pair = _sdf->Get<std::string>("log_name", "");
     if (std::get<bool>(name_pair)) {
         const_cast<std::string&>(plugin_name) = std::get<std::string>(name_pair);
     }
-    NAMED_LOG << "plugin_name: <" << plugin_name << ">";
+    log() << "plugin_name: <" << plugin_name << ">" << END_LOG;
 
     const_cast<std::string&>(trigger_joint_name) = _sdf->Get<std::string>("trigger_joint");
-    NAMED_LOG << "trigger_joint_name: <" << trigger_joint_name << ">";
+    log() << "trigger_joint_name: <" << trigger_joint_name << ">" << END_LOG;
 
     std::pair<double, bool> pressed_result_pair = _sdf->Get<double>("percentage_activated", DEFAULT_PERCENTAGE_ACTIVATED);
     const_cast<double&>(percentage_activated) = std::get<double>(pressed_result_pair);
-    NAMED_LOG << "percentage_activated: <" << percentage_activated << ">";
+    log() << "percentage_activated: <" << percentage_activated << ">" << END_LOG;
 
     std::pair<bool, bool> is_oneshot_pair = _sdf->Get<bool>("is_oneshot", false);
     const_cast<bool&>(is_oneshot) = std::get<0>(is_oneshot_pair);
-    NAMED_LOG << "is_oneshot: <" << (is_oneshot ? "true" : "false") << ">";
+    log() << "is_oneshot: <" << (is_oneshot ? "true" : "false") << ">" << END_LOG;
 }

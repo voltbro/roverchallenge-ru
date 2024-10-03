@@ -34,6 +34,7 @@
         <closing_force>0</closing_force>
         <is_oneshot>true</is_oneshot>
         <log_name>${name}</log_name>
+        <do_log>false</do_log>
     </plugin>
 </xacro:macro>
 
@@ -50,6 +51,19 @@
     <parent>world</parent>
     <child>main-panel::panel</child>
 </joint>
+
+<plugin
+    filename="${gazebo_systems_lib_dir}/libTriggerSystems.so"
+    name="trigger_systems::DoorButton">
+    <hinge_joint>panel_door_joint</hinge_joint>
+    <trigger_joint>door_rotator_rotator_to_frame_joint</trigger_joint>
+    <percentage_activated>50</percentage_activated>
+    <opening_force>100</opening_force>
+    <closing_force>-100</closing_force>
+    <is_oneshot>true</is_oneshot>
+    <log_name>panel_door</log_name>
+    <do_log>true</do_log>
+</plugin>
 
 </world>
 </sdf>

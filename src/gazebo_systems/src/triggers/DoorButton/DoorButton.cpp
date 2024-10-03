@@ -12,7 +12,6 @@
 #include <gz/plugin/Register.hh>
 
 #include "DoorButton.h"
-#include <common.hpp>
 
 // Recommended by gazebo docs
 using namespace gz;
@@ -25,7 +24,7 @@ void DoorButton::post_configure(EntityComponentManager &_ecm) {
     BaseJointTriggerSystem::post_configure(_ecm);
 
     hinge_joint = Joint(_ecm.EntityByComponents(components::Name(hinge_joint_name)));
-    NAMED_LOG << "Hinge: " << hinge_joint.Name(_ecm).value();
+    log() << "Hinge: " << hinge_joint.Name(_ecm).value() << END_LOG;
 }
 
 void DoorButton::Configure(
@@ -37,27 +36,27 @@ void DoorButton::Configure(
     BaseJointTriggerSystem::Configure(_entity, _sdf, _ecm, _event_mgr);
 
     const_cast<std::string&>(hinge_joint_name) = _sdf->Get<std::string>("hinge_joint");
-    NAMED_LOG << "hinge_joint_name: <" << hinge_joint_name << ">";
+    log() << "hinge_joint_name: <" << hinge_joint_name << ">" << END_LOG;
 
     std::pair<double, bool> opening_force_result_pair = _sdf->Get<double>("opening_force", DEFAULT_DOOR_FORCE);
     const_cast<double&>(opening_force) = std::get<double>(opening_force_result_pair);
-    NAMED_LOG << "opening_force: <" << opening_force << ">";
+    log() << "opening_force: <" << opening_force << ">" << END_LOG;
 
     std::pair<double, bool> closing_force_result_pair = _sdf->Get<double>("closing_force", -DEFAULT_DOOR_FORCE);
     const_cast<double&>(closing_force) = std::get<double>(closing_force_result_pair);
-    NAMED_LOG << "closing_force: <" << closing_force << ">";
+    log() << "closing_force: <" << closing_force << ">" << END_LOG;
 
     const_cast<std::vector<double>&>(opening_forces)[0] = opening_force;
     const_cast<std::vector<double>&>(closing_forces)[0] = closing_force;
 }
 
 void DoorButton::on_activation(EntityComponentManager &_ecm) {
-    NAMED_LOG << "Activation";
+    log() << "Activation" << END_LOG;
     hinge_joint.SetForce(_ecm, opening_forces);
 }
 
 void DoorButton::on_deactivation(EntityComponentManager &_ecm) {
-    NAMED_LOG << "Deactivation";
+    log() << "Deactivation" << END_LOG;
     hinge_joint.SetForce(_ecm, closing_forces);
 }
 

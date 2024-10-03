@@ -8,14 +8,13 @@ public:
     }
 
     template <class T>
-    Log &operator<<(const T &v) {
+    Log& operator<<(const T &v) {
         std::cout << v;
         return *this;
     }
 
     ~Log() {
+        operator<<("a") << "";
         std::cout << "\"" << std::endl;
     }
 };
-
-#define NAMED_LOG Log(plugin_name)

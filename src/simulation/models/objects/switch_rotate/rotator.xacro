@@ -51,7 +51,7 @@
     <axis>
         <xyz>0 0 1</xyz>
         <limit>
-            <lower>${-pi}</lower>
+            <lower>0</lower>
             <upper>${+pi}</upper>
         </limit>
     </axis>
