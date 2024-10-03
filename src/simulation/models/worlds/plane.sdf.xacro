@@ -15,36 +15,15 @@
 </model>
 
 <include>
-    <name>switch_wall</name>
-    <uri>file:/$(env MODELS_DIR)/objects/test/switch_with_base</uri>
-    <pose>5 0 1 0 0 0</pose>
-</include>
-
-<include>
-    <name>door</name>
-    <uri>file:/$(env MODELS_DIR)/objects/test/simple_door</uri>
-    <pose>0 5 1 0 0 0</pose>
-</include>
-
-<include>
-    <name>rotator_wall</name>
-    <uri>file:/$(env MODELS_DIR)/objects/test/rotator_with_base</uri>
-    <pose>0 -5 1 0 0 0</pose>
-</include>
-
-<include>
-    <uri>file:/$(env MODELS_DIR)/objects/garage-inter</uri>
-    <pose>-5 0 0 0 0 0</pose>
+    <uri>file:/$(env MODELS_DIR)/objects/garage</uri>
+    <pose>5 0 0 0 0 0</pose>
 </include>
 <joint name="garage_to_world" type="fixed">
     <parent>world</parent>
     <child>garage::garage</child>
 </joint>
 
-<xacro:macro
-    name="garage_door_trigger"
-    params="name force"
->
+<xacro:macro name="garage_door_trigger" params="name force">
     <plugin
         filename="${gazebo_systems_lib_dir}/libTriggerSystems.so"
         name="trigger_systems::DoorButton">
@@ -62,6 +41,15 @@
 <xacro:garage_door_trigger name="outer_close" force="-5000"/>
 <xacro:garage_door_trigger name="inner_open" force="5000"/>
 <xacro:garage_door_trigger name="inner_close" force="-5000"/>
+
+<include>
+    <uri>file:/$(env MODELS_DIR)/objects/main-panel</uri>
+    <pose>-5 0 2 0 0 0</pose>
+</include>
+<joint name="panel_to_world" type="fixed">
+    <parent>world</parent>
+    <child>main-panel::panel</child>
+</joint>
 
 </world>
 </sdf>

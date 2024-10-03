@@ -1,0 +1,64 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="switch_room" params="name_prefix:=''">
+
+<link name="${name_prefix}frame">
+    <self_collide>false</self_collide>
+    <xacro:macro name="frame_stl">
+        <geometry>
+          <mesh>
+            <uri>file:/$(env MODELS_DIR)/objects/switch_room/03-rs-base.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </xacro:macro>
+      <visual name="frame_visual">
+        <xacro:frame_stl/>
+        <material>
+          <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+          </script>
+        </material>
+      </visual>
+</link>
+
+<link name="${name_prefix}tumbler">
+    <self_collide>false</self_collide>
+    <pose>0 0 0.005 0 0 0</pose>
+    <xacro:macro name="tumbler_stl">
+        <geometry>
+          <mesh>
+            <uri>file:/$(env MODELS_DIR)/objects/switch_room/03-rs-tumbler.stl</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </xacro:macro>
+      <collision name="tumbler_collision">
+        <xacro:tumbler_stl/>
+      </collision>
+      <visual name="tumbler_visual">
+        <xacro:tumbler_stl/>
+        <material>
+          <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Red</name>
+          </script>
+        </material>
+      </visual>
+</link>
+
+<joint name="${name_prefix}tumbler_to_frame_joint" type="revolute">
+    <parent>${name_prefix}frame</parent>
+    <child>${name_prefix}tumbler</child>
+    <pose>0 0 0 0 0 0</pose>
+    <axis>
+      <xyz>0 1 0</xyz>
+      <limit>
+        <lower>-0,174533</lower>
+        <upper>+0,174533</upper>
+      </limit>
+    </axis>
+</joint>
+
+</xacro:macro>
+</include>

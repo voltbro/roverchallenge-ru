@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.10">
+<model name="weight_button">
+
+<xacro:include filename="weight_button.xacro" />
+<xacro:weight_button/>
+
+</model>
+</sdf>
