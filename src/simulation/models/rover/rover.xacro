@@ -23,11 +23,6 @@
         <material name="gray">
             <color rgba="0.4 0.4 0.4 1.0"/>
         </material>
-        <!--
-        <material name="blue">
-            <color rgba="0 0 0.7 1.0"/>
-        </material>
-        -->
     </visual>
     <collision name="base_collision">
         <origin  xyz="0 0 ${z_offset_to_center}"/>
@@ -134,7 +129,7 @@
 <joint name="camera_joint" type="fixed">
     <parent link="base"/>
     <child link="camera"/>
-    <origin xyz="0 0 ${robot_side_z/2}"/>
+    <origin xyz="0 0 ${robot_side_z/2 + z_offset_to_center + 0.05}" rpy="0 0 0"/>
 </joint>
 <gazebo reference="camera">
     <sensor name="camera" type="camera">
