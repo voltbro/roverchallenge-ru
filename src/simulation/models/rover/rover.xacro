@@ -5,28 +5,32 @@
 <xacro:include filename="sslidar.xacro" />
 <xacro:include filename="wheel.xacro" />
 
-<xacro:property name="robot_side_x" value="0.7" />
-<xacro:property name="robot_side_y" value="0.7" />
-<xacro:property name="robot_side_z" value="0.5" />
+<xacro:property name="robot_side_x" value="0.898" />
+<xacro:property name="robot_side_y" value="0.426" />
+<xacro:property name="robot_side_z" value="0.278" />
+<xacro:property name="z_offset_to_center" value="${robot_side_z / 2 - 0.043}" />
 
-<xacro:property name="robot_mass" value="2" />
-<xacro:property name="wheel_x_offset" value="0.4" />
-<xacro:property name="wheel_y_offset" value="0.4" />
-<xacro:property name="wheel_diameter" value="0.3" />
+<xacro:property name="robot_mass" value="30" />
+<xacro:property name="wheel_x_offset" value="0.25" />
+<xacro:property name="wheel_y_offset" value="0.3005" />
+<xacro:property name="wheel_radius" value="0.185" />
 
 <link name="base">
     <visual name="base_visual">
-        <origin  xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-            <box size="${robot_side_x} ${robot_side_y} ${robot_side_z}" />
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/explorer-base.stl"/>
         </geometry>
+        <material name="gray">
+            <color rgba="0.4 0.4 0.4 1.0"/>
+        </material>
+        <!--
         <material name="blue">
             <color rgba="0 0 0.7 1.0"/>
         </material>
+        -->
     </visual>
-
     <collision name="base_collision">
-        <origin  xyz="0 0 0"/>
+        <origin  xyz="0 0 ${z_offset_to_center}"/>
         <geometry>
             <box size="${robot_side_x} ${robot_side_y} ${robot_side_z}" />
         </geometry>
@@ -40,23 +44,90 @@
     </inertial>
     <visual name="base_visual">
         <geometry>
-            <sphere radius="${robot_side_z / 2 + 0.025}"/>
-            <material name="red">
-                <color rgba="1.0 0 0 1.0"/>
-            </material>
+            <!--<sphere radius="${robot_side_z / 2 + 0.025}"/>-->
+            <sphere radius="0.1"/>
         </geometry>
+        <material name="blue">
+            <color rgba="0 0 1.0 1.0"/>
+        </material>
     </visual>
 </link>
 
 <joint name="base_weight_joint" type="fixed">
     <parent link="base"/>
     <child link="base_weight"/>
+    <origin xyz="0 0 ${z_offset_to_center}" rpy="0 0 0"/>
 </joint>
 
-<xacro:wheel index="0" xyz="${wheel_x_offset} ${-wheel_y_offset} 0" axis="0 0 -1" diameter="${wheel_diameter}"/>
-<xacro:wheel index="1" xyz="${-wheel_x_offset} ${-wheel_y_offset} 0" axis="0 0 -1" diameter="${wheel_diameter}"/>
-<xacro:wheel index="2" xyz="${wheel_x_offset} ${wheel_y_offset} 0" axis="0 0 -1" diameter="${wheel_diameter}"/>
-<xacro:wheel index="3" xyz="${-wheel_x_offset} ${wheel_y_offset} 0" axis="0 0 -1" diameter="${wheel_diameter}"/>
+<link name="top_face">
+    <visual name="top_face_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/top-face.stl"/>
+        </geometry>
+        <material name="red">
+            <color rgba="1.0 0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+
+<link name="top_rails">
+    <visual name="top_rails_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/top-rails.stl"/>
+        </geometry>
+        <material name="black">
+            <color rgba="0 0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+
+<link name="bumper_front">
+    <visual name="bumper_front_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/bumper.stl"/>
+        </geometry>
+        <material name="black">
+            <color rgba="0 0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+
+<link name="bumper_back">
+    <visual name="bumper_back_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/bumper.stl"/>
+        </geometry>
+        <material name="black">
+            <color rgba="0 0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+
+<joint name="bumper_front_to_base" type="fixed">
+    <parent link="base"/>
+    <child link="bumper_front"/>
+    <origin xyz="0.383 0.001 0.029" rpy="${-pi/2} 0 ${-pi/2}"/>
+</joint>
+<joint name="bumper_back_to_base" type="fixed">
+    <parent link="base"/>
+    <child link="bumper_back"/>
+    <origin xyz="-0.383 0.001 0.031" rpy="${pi/2} 0 ${-pi/2}"/>
+</joint>
+<joint name="top_rails_to_base" type="fixed">
+    <parent link="base"/>
+    <child link="top_rails"/>
+    <origin xyz="0 0 0.215" rpy="0 0 0"/>
+</joint>
+<joint name="top_face_to_base" type="fixed">
+    <parent link="base"/>
+    <child link="top_face"/>
+    <origin xyz="0 0 0.213" rpy="0 0 0"/>
+</joint>
+
+<xacro:wheel index="0" xyz="${wheel_x_offset} ${-wheel_y_offset} 0" yaw="0" axis="0 0 -1" radius="${wheel_radius}"/>
+<xacro:wheel index="1" xyz="${-wheel_x_offset} ${-wheel_y_offset} 0" yaw="0" axis="0 0 -1" radius="${wheel_radius}"/>
+<xacro:wheel index="2" xyz="${wheel_x_offset} ${wheel_y_offset} 0" yaw="${pi}" axis="0 0 1" radius="${wheel_radius}"/>
+<xacro:wheel index="3" xyz="${-wheel_x_offset} ${wheel_y_offset} 0" yaw="${pi}" axis="0 0 1" radius="${wheel_radius}"/>
 
 <!-- CAMERA BLOCK-->
 <link name="camera"></link>
@@ -121,7 +192,7 @@
 
         <!-- kinematics -->
         <wheel_separation>${wheel_y_offset*2}</wheel_separation>
-        <wheel_diameter>${wheel_diameter}</wheel_diameter>
+        <wheel_diameter>${wheel_radius * 2}</wheel_diameter>
 
         <!-- ODOMETRY -->
         <odom_publish_frequency>0</odom_publish_frequency>
