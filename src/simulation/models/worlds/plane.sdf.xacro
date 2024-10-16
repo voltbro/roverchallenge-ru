@@ -44,12 +44,12 @@
 <xacro:garage_door_trigger name="inner_close" force="-5000"/>
 
 <include>
-    <uri>file:/$(env MODELS_DIR)/objects/main-panel</uri>
-    <pose>-5 0 2 0 0 0</pose>
+    <uri>file:/$(env MODELS_DIR)/objects/01-module</uri>
+    <pose>-5 0 0 0 0 0</pose>
 </include>
-<joint name="panel_to_world" type="fixed">
+<joint name="module_to_world" type="fixed">
     <parent>world</parent>
-    <child>main-panel::panel</child>
+    <child>module::module_base</child>
 </joint>
 
 <plugin
