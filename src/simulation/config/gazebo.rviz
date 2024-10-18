@@ -57,19 +57,59 @@ Visualization Manager:
         All Enabled: false
         base:
           Value: false
+        base_link:
+          Value: true
         base_weight:
           Value: false
+        bumper_back:
+          Value: true
+        bumper_front:
+          Value: true
         camera:
           Value: false
+        link_01:
+          Value: true
+        link_01_red:
+          Value: true
+        link_02:
+          Value: true
+        link_02_red:
+          Value: true
+        link_03:
+          Value: true
+        link_03_red:
+          Value: true
+        link_04:
+          Value: true
+        link_04_red:
+          Value: true
+        link_05:
+          Value: true
+        link_05_red:
+          Value: true
+        link_06:
+          Value: true
         odom:
           Value: true
-        wheel_0:
+        top_face:
           Value: true
-        wheel_1:
+        top_rails:
           Value: true
-        wheel_2:
+        wheel_0_disc:
           Value: true
-        wheel_3:
+        wheel_0_tyre:
+          Value: true
+        wheel_1_disc:
+          Value: true
+        wheel_1_tyre:
+          Value: true
+        wheel_2_disc:
+          Value: true
+        wheel_2_tyre:
+          Value: true
+        wheel_3_disc:
+          Value: true
+        wheel_3_tyre:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -79,18 +119,48 @@ Visualization Manager:
       Tree:
         odom:
           base:
+            base_link:
+              link_01:
+                link_01_red:
+                  {}
+                link_02:
+                  link_02_red:
+                    {}
+                  link_03:
+                    link_03_red:
+                      {}
+                    link_04:
+                      link_04_red:
+                        {}
+                      link_05:
+                        link_05_red:
+                          {}
+                        link_06:
+                          {}
             base_weight:
+              {}
+            bumper_back:
+              {}
+            bumper_front:
               {}
             camera:
               {}
-            wheel_0:
+            top_face:
               {}
-            wheel_1:
+            top_rails:
               {}
-            wheel_2:
-              {}
-            wheel_3:
-              {}
+            wheel_0_disc:
+              wheel_0_tyre:
+                {}
+            wheel_1_disc:
+              wheel_1_tyre:
+                {}
+            wheel_2_disc:
+              wheel_2_tyre:
+                {}
+            wheel_3_disc:
+              wheel_3_tyre:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -116,7 +186,22 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_weight:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bumper_back:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bumper_front:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -125,22 +210,107 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        wheel_0:
+        link_01:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wheel_1:
+        link_01_red:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wheel_2:
+        link_02:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wheel_3:
+        link_02_red:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_03:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_03_red:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_04:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_04_red:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_05:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_05_red:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_06:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        top_face:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        top_rails:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_0_disc:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_0_tyre:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_1_disc:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_1_tyre:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_2_disc:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_2_tyre:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_3_disc:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_3_tyre:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -240,6 +410,356 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Acceleration_Scaling_Factor: 0.1
+      Class: moveit_rviz_plugin/MotionPlanning
+      Enabled: true
+      Move Group Namespace: ""
+      MoveIt_Allow_Approximate_IK: false
+      MoveIt_Allow_External_Program: false
+      MoveIt_Allow_Replanning: false
+      MoveIt_Allow_Sensor_Positioning: false
+      MoveIt_Planning_Attempts: 10
+      MoveIt_Planning_Time: 5
+      MoveIt_Use_Cartesian_Path: false
+      MoveIt_Use_Constraint_Aware_IK: false
+      MoveIt_Workspace:
+        Center:
+          X: 0
+          Y: 0
+          Z: 0
+        Size:
+          X: 2
+          Y: 2
+          Z: 2
+      Name: MotionPlanning
+      Planned Path:
+        Color Enabled: false
+        Interrupt Display: false
+        Links:
+          All Links Enabled: true
+          Expand Joint Details: false
+          Expand Link Details: false
+          Expand Tree: false
+          Link Tree Style: Links in Alphabetic Order
+          base:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          base_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          base_weight:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          bumper_back:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          bumper_front:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          camera:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          link_01:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_01_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_02:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_02_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_03:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_03_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_04:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_04_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_05:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_05_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_06:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          top_face:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          top_rails:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_0_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_0_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_1_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_1_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_2_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_2_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_3_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_3_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+        Loop Animation: false
+        Robot Alpha: 0.5
+        Robot Color: 150; 50; 150
+        Show Robot Collision: false
+        Show Robot Visual: true
+        Show Trail: false
+        State Display Time: 3x
+        Trail Step Size: 1
+        Trajectory Topic: /display_planned_path
+        Use Sim Time: false
+      Planning Metrics:
+        Payload: 1
+        Show Joint Torques: false
+        Show Manipulability: false
+        Show Manipulability Index: false
+        Show Weight Limit: false
+        TextHeight: 0.07999999821186066
+      Planning Request:
+        Colliding Link Color: 255; 0; 0
+        Goal State Alpha: 1
+        Goal State Color: 250; 128; 0
+        Interactive Marker Size: 0
+        Joint Violation Color: 255; 0; 255
+        Planning Group: ruka_arm_controller
+        Query Goal State: true
+        Query Start State: false
+        Show Workspace: false
+        Start State Alpha: 1
+        Start State Color: 0; 255; 0
+      Planning Scene Topic: /monitored_planning_scene
+      Robot Description: robot_description
+      Scene Geometry:
+        Scene Alpha: 0.8999999761581421
+        Scene Color: 50; 230; 50
+        Scene Display Time: 0.009999999776482582
+        Show Scene Geometry: true
+        Voxel Coloring: Z-Axis
+        Voxel Rendering: Occupied Voxels
+      Scene Robot:
+        Attached Body Color: 150; 50; 150
+        Links:
+          All Links Enabled: true
+          Expand Joint Details: false
+          Expand Link Details: false
+          Expand Tree: false
+          Link Tree Style: Links in Alphabetic Order
+          base:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          base_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          base_weight:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          bumper_back:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          bumper_front:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          camera:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          link_01:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_01_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_02:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_02_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_03:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_03_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_04:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_04_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_05:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_05_red:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_06:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          top_face:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          top_rails:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_0_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_0_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_1_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_1_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_2_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_2_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_3_disc:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          wheel_3_tyre:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+        Robot Alpha: 1
+        Show Robot Collision: false
+        Show Robot Visual: true
+      Value: true
+      Velocity_Scaling_Factor: 0.1
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -286,25 +806,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 5.743742942810059
+      Distance: 2.7267990112304688
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.15018558502197266
+        Y: -0.1194726973772049
+        Z: 0.07839139550924301
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7647968530654907
+      Pitch: 0.34979715943336487
       Target Frame: base
       Value: Orbit (rviz)
-      Yaw: 1.8399971723556519
+      Yaw: 1.844997763633728
     Saved:
       - Class: rviz_default_plugins/Orbit
         Distance: 1.2254868745803833
@@ -327,14 +847,18 @@ Visualization Manager:
         Value: Orbit (rviz)
         Yaw: 0.7850000262260437
 Window Geometry:
+  "":
+    collapsed: false
+  " - Trajectory Slider":
+    collapsed: false
   Displays:
     collapsed: false
   Height: 1070
-  Hide Left Dock: true
+  Hide Left Dock: false
   Hide Right Dock: false
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000003000000000000023d000001f7fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d006500720061010000003b000001f800000000000000000000000100000158000001f3fc0200000003fb0000000a0049006d006100670065010000003d000001f30000001600fffffffb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000300000266000001dbfc0100000002fc00000000000002660000026600fffffffa000000030200000004fb0000000a005600690065007700730100000000ffffffff000000a400fffffffb0000000800540069006d00650100000000ffffffff0000003900fffffffb0000000a005600690065007700730100000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000ffffffff000000c900fffffffb0000000800540069006d0065010000000000000450000000000000000000000108000001f300000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000003000000000000023d000001f3fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d006500720061010000003b000001f80000000000000000fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000004100ffffff0000000100000158000001f3fc0200000003fb0000000a0049006d006100670065010000003d000001f30000001600fffffffb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000003000003c3000001dbfc0100000002fc00000000000003c30000026600fffffffa000000000200000005fbffffffff0100000000ffffffff0000017d00fffffffb0000000a005600690065007700730100000000ffffffff000000a400fffffffb0000000800540069006d00650100000000ffffffff0000003900fffffffb0000000a005600690065007700730100000000ffffffff0000000000000000fb000000100044006900730070006c0061007900730100000000ffffffff000000c900fffffffb0000000800540069006d0065010000000000000450000000000000000000000265000001f300000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -343,6 +867,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 614
-  X: 1176
+  Width: 963
+  X: 827
   Y: 25

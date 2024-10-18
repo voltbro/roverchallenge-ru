@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="explorer" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(env MODELS_DIR)/rover/rover.urdf.xacro" />
+<xacro:include filename="$(find ruka_gz)/config/ruka_gz.urdf.xacro" />
+
+<joint name="ruka_to_rover" type="fixed">
+    <parent link="base"/>
+    <child link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0.215"/>
+</joint>
+
+<gazebo>
+    <plugin
+        filename="gz-sim-joint-state-publisher-system"
+        name="gz::sim::systems::JointStatePublisher">
+        <topic>joint_states</topic> <!--from <ros><remapping> -->
+        <joint_name>wheel_0_joint</joint_name>
+        <joint_name>wheel_1_joint</joint_name>
+        <joint_name>wheel_2_joint</joint_name>
+        <joint_name>wheel_3_joint</joint_name>
+        <joint_name>base_link__link_01</joint_name>
+        <joint_name>link_01__link_02</joint_name>
+        <joint_name>link_02__link_03</joint_name>
+        <joint_name>link_03__link_04</joint_name>
+        <joint_name>link_04__link_05</joint_name>
+        <joint_name>link_05__link_06</joint_name>
+  </plugin>
+</gazebo>
+
+</robot>

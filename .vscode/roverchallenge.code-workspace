@@ -3,7 +3,7 @@
 		{
 			"name": "package",
 			"path": ".."
-		},
+		}
 	],
 	"extensions": {"recommendations": [
 		"ms-python.python",

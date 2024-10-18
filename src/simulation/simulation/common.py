@@ -10,13 +10,11 @@ RVIZ_CONFIG_PARAM_NAME = "rviz_config"
 
 SIM_DIR = Path(os.environ["SIM_DIR"])
 MODELS_DIR = Path(os.environ["MODELS_DIR"])
-ROBOT_MODEL_PATH = MODELS_DIR / "rover" / "rover.urdf"
+ROBOT_MODEL_PATH = MODELS_DIR / "explorer" / "explorer.urdf"
 
 
 def get_robot_state_publisher_generator(kwargs=None):
-    def generate_robot_state_publisher(
-        context: LaunchContext, model_path: LaunchConfiguration | Path
-    ):
+    def generate_robot_state_publisher(context: LaunchContext, model_path: LaunchConfiguration | Path):
         nonlocal kwargs
 
         if isinstance(model_path, Path):
