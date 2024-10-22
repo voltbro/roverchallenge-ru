@@ -1,0 +1,6 @@
+[submodule "src/Raspberry_Cyphal_ruka"]
+	path = src/Raspberry_Cyphal_ruka
+	url = git@github.com:VB-Industrial/Raspberry_Cyphal_ruka.git
+[submodule "ruka_gz"]
+	path = src/ruka_gz
+	url = git@github.com:VB-Industrial/ruka_gz.git
