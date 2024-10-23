@@ -7,7 +7,7 @@
 <joint name="ruka_to_rover" type="fixed">
     <parent link="base"/>
     <child link="base_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0.215"/>
+    <origin rpy="0 0 0" xyz="0.2 0 0.251"/>
 </joint>
 
 <gazebo>

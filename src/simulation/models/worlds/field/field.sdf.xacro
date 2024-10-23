@@ -16,7 +16,7 @@
 <model name='explorer'>
     <include>
          <uri>file:/$(env MODELS_DIR)/explorer/explorer.urdf</uri>
-         <pose>5.0 5.0 0.5 0.0 0 0.0</pose>
+         <pose>10 11 0.5 0.0 0 0.0</pose>
     </include>
 </model>
 

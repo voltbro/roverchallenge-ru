@@ -124,12 +124,44 @@
 <xacro:wheel index="2" xyz="${wheel_x_offset} ${wheel_y_offset} 0" yaw="${pi}" axis="0 0 1" radius="${wheel_radius}"/>
 <xacro:wheel index="3" xyz="${-wheel_x_offset} ${wheel_y_offset} 0" yaw="${pi}" axis="0 0 1" radius="${wheel_radius}"/>
 
+<link name="mount_plate">
+    <visual name="mount_plate_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/moun-plate.stl"/>
+        </geometry>
+        <material name="wood">
+            <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+    </visual>
+</link>
+<joint name="mount_plate_to_base" type="fixed">
+    <parent link="base"/>
+    <child link="mount_plate"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<link name="realsense">
+    <visual name="realsense_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/rover/stl/realsens.stl"/>
+        </geometry>
+        <material name="steel">
+            <color rgba="0.8 0.8 0.8 1.0"/>
+        </material>
+    </visual>
+</link>
+<joint name="realsense_to_base" type="fixed">
+    <parent link="base"/>
+    <child link="realsense"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
 <!-- CAMERA BLOCK-->
 <link name="camera"></link>
 <joint name="camera_joint" type="fixed">
     <parent link="base"/>
     <child link="camera"/>
-    <origin xyz="0 0 ${robot_side_z/2 + z_offset_to_center + 0.05}" rpy="0 0 0"/>
+    <origin xyz="0.363 0 0.216" rpy="0 -0.17 0"/>
 </joint>
 <gazebo reference="camera">
     <sensor name="camera" type="camera">
