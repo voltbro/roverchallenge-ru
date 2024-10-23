@@ -124,17 +124,6 @@ def add_moveit(ld: LaunchDescription):
             )
         ),
     )
-    """
-    ld.add_action(
-        Node(
-            package="tf2_ros",
-            executable="static_transform_publisher",
-            name="static_transform_publisher",
-            output="log",
-            arguments=["0.0", "0.0", "0.215", "0.0", "0.0", "0.0", "base", "base_link"],
-        )
-    )
-    """
 
 
 def add_rviz(ld: LaunchDescription):

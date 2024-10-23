@@ -1,0 +1,43 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="module" params="suffix">
+<static>false</static>
+
+<xacro:include filename="$(env MODELS_DIR)/common/utils.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/main-panel/main-panel.xacro" />
+
+<link name="module_base">
+    <self_collide>false</self_collide>
+    <xacro:macro name="module_stl">
+        <geometry>
+            <mesh>
+                <uri>file:/$(env MODELS_DIR)/objects/01-module/01-module.stl</uri>
+                <scale>1 1 1</scale>
+            </mesh>
+        </geometry>
+    </xacro:macro>
+    <collision name="module_collision">
+        <xacro:module_stl/>
+    </collision>
+    <visual name="module_visual">
+        <xacro:module_stl/>
+        <material>
+            <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Yellow</name>
+            </script>
+        </material>
+    </visual>
+    <xacro:cuboid_inertia pose="0.25 0.25 0.5 0 0 0" weight="100" a="0.5" b="0.5" c="1"/>
+</link>
+
+<model name='main-panel-${suffix}'>
+    <xacro:main_panel suffix="${suffix}"/>
+    <pose>0.503 0 0.55 ${-pi/2} ${pi} ${-pi/2}</pose>
+</model>
+<joint name="main_panel_to_module_base_joint" type="fixed">
+    <parent>module_base</parent>
+    <child>main-panel-${suffix}::panel</child>
+</joint>
+
+</xacro:macro>
+</include>

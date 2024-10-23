@@ -1,0 +1,64 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="marker" params="image:='40.png'">
+<static>true</static>
+
+<link name="marker_pole">
+  <collision name="pole_collision">
+    <geometry>
+      <box>
+        <size>0.3 0.3 0.7</size>
+      </box>
+    </geometry>
+  </collision>
+  <visual name="pole_visual">
+    <pose>0 0 0.35 ${pi} 0 0</pose>
+    <geometry>
+      <mesh>
+        <uri>file:/$(env MODELS_DIR)/objects/marker/marker10.stl</uri>
+        <scale>1 1 1</scale>
+      </mesh>
+    </geometry>
+    <material>
+      <script>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+        <name>Gazebo/Yellow</name>
+      </script>
+    </material>
+  </visual>
+</link>
+
+<xacro:macro name="marker_image" params="ind pose img">
+<link name="marker_image_${ind}">
+  <visual name="marker_image_visual_${ind}">
+    <pose>${pose}</pose>
+    <geometry>
+      <plane>
+        <size>0.2 0.3</size>
+      </plane>
+    </geometry>
+    <material>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>1 0.8 0.8 1</specular>
+      <pbr>
+          <metal>
+            <albedo_map>file:/$(env MODELS_DIR)/objects/marker/${img}</albedo_map>
+            <normal_map>file:/$(env MODELS_DIR)/objects/marker/${img}</normal_map>
+          </metal>
+        </pbr>
+    </material>
+  </visual>
+</link>
+<joint name="pole_image_joint_${ind}" type="fixed">
+    <parent>marker_pole</parent>
+    <child>marker_image_${ind}</child>
+</joint>
+</xacro:macro>
+
+<xacro:marker_image ind="0" pose="-0.14 0 0.175 ${pi/2} 0 ${-pi/2}" img="${image}"/>
+<xacro:marker_image ind="1" pose="0.14 0 0.175  ${pi/2} 0 ${pi/2}" img="${image}"/>
+<xacro:marker_image ind="2" pose="0 -0.14 0.175 ${pi/2} 0 0" img="${image}"/>
+<xacro:marker_image ind="3" pose="0 0.14 0.175  ${pi/2} 0 ${pi}" img="${image}"/>
+
+</xacro:macro>
+</include>

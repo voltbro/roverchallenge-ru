@@ -1,0 +1,152 @@
+<include xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="main_panel" params="suffix">
+<static>false</static>
+
+<xacro:include filename="$(env MODELS_DIR)/common/utils.xacro" />
+
+<link name="panel">
+    <self_collide>false</self_collide>
+    <xacro:macro name="panel_stl">
+        <geometry>
+            <mesh>
+                <uri>file:/$(env MODELS_DIR)/objects/main-panel/main-panel.stl</uri>
+                <scale>1 1 1</scale>
+            </mesh>
+        </geometry>
+    </xacro:macro>
+    <collision name="panel_collision">
+        <xacro:panel_stl/>
+    </collision>
+    <visual name="panel_visual">
+        <xacro:panel_stl/>
+        <material>
+            <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Yellow</name>
+            </script>
+        </material>
+    </visual>
+</link>
+
+<link name="panel_image">
+    <visual name="panel_image_visual">
+        <pose>0.35 0.225 0.005 0 0 0</pose>
+        <geometry>
+            <plane>
+                <size>0.7 0.45</size>
+            </plane>
+        </geometry>
+        <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>1 0.8 0.8 1</specular>
+            <pbr>
+                <metal>
+                    <albedo_map>file:/$(env MODELS_DIR)/objects/main-panel/supply-texture.png</albedo_map>
+                    <normal_map>file:/$(env MODELS_DIR)/objects/main-panel/supply-texture.png</normal_map>
+                </metal>
+            </pbr>
+        </material>
+    </visual>
+</link>
+
+<joint name="pole_image_joint" type="fixed">
+    <parent>panel</parent>
+    <child>panel_image</child>
+</joint>
+
+<link name="panel_door">
+    <pose>0.46 0.16 -0.008 0 0 0</pose>
+    <self_collide>false</self_collide>
+    <xacro:macro name="panel_door_stl">
+        <geometry>
+            <mesh>
+                <uri>file:/$(env MODELS_DIR)/objects/main-panel/sampler-door.stl</uri>
+                <scale>1 1 1</scale>
+            </mesh>
+        </geometry>
+    </xacro:macro>
+    <collision name="panel_door_collision">
+        <xacro:panel_door_stl/>
+    </collision>
+    <visual name="panel_door_visual">
+        <xacro:panel_door_stl/>
+        <material>
+            <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Blue</name>
+            </script>
+        </material>
+    </visual>
+</link>
+
+<joint name="${suffix}_panel_door_joint" type="prismatic">
+    <parent>panel</parent>
+    <child>panel_door</child>
+    <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+            <lower>0</lower>
+            <upper>0.18</upper>
+        </limit>
+        <dynamics>
+            <damping>0</damping>
+            <spring_stiffness>0</spring_stiffness>
+            <spring_reference>0</spring_reference>
+        </dynamics>
+    </axis>
+    <physics>
+        <ode>
+            <cfm_damping>1</cfm_damping>
+        </ode>
+    </physics>
+</joint>
+
+<xacro:include filename="$(env MODELS_DIR)/objects/switch_rotate/rotator.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/switch/switch.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/button/button.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/weight-button/weight_button.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/switch_room/switch_room.xacro" />
+
+<xacro:macro name="trigger" params="type name pose">
+    <model name="${name}_trigger">
+        <pose>${pose}</pose>
+        <xacro:if value="${type == 'switch'}">
+            <xacro:switch name_prefix="${name}_"/>
+        </xacro:if>
+        <xacro:if value="${type == 'rotator'}">
+            <xacro:rotator name_prefix="${name}_"/>
+        </xacro:if>
+        <xacro:if value="${type == 'button'}">
+            <xacro:button name_prefix="${name}_"/>
+        </xacro:if>
+        <xacro:if value="${type == 'weight_button'}">
+            <xacro:weight_button name_prefix="${name}_"/>
+        </xacro:if>
+        <xacro:if value="${type == 'switch_room'}">
+            <xacro:switch_room name_prefix="${name}_"/>
+        </xacro:if>
+    </model>
+    <joint name="${name}_trigger_to_wall_joint" type="fixed">
+        <parent>panel</parent>
+        <child>${name}_trigger::${name}_frame</child>
+    </joint>
+</xacro:macro>
+
+<xacro:trigger type="rotator" name="${suffix}_door_rotator" pose="0.53 0.095 0 0 0 0"/>
+
+<xacro:trigger type="weight_button" name="secret-button" pose="0.55 0.16 -0.06 ${-pi/2} 0 0"/>
+
+<xacro:trigger type="switch_room" name="switch_room" pose="0.16 0.29 0 0 0 ${-pi/2}"/>
+
+<xacro:trigger type="button" name="button-1" pose="0.291 0.289 0 0 0 0"/>
+
+<xacro:trigger type="switch" name="switch-1" pose="0.133 0.115 0 0 0 ${-pi/2}"/>
+<xacro:trigger type="switch" name="switch-2" pose="0.193 0.115 0 0 0 ${-pi/2}"/>
+<xacro:trigger type="switch" name="switch-3" pose="0.253 0.115 0 0 0 ${-pi/2}"/>
+<xacro:trigger type="switch" name="switch-4" pose="0.313 0.115 0 0 0 ${-pi/2}"/>
+<xacro:trigger type="switch" name="switch-5" pose="0.373 0.115 0 0 0 ${-pi/2}"/>
+
+
+</xacro:macro>
+</include>
