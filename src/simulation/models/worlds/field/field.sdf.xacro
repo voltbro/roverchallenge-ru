@@ -72,10 +72,8 @@
     </plugin>
 </xacro:macro>
 
-<!--
 <xacro:world_module suffix="outter" pose="3.346 12.598 1.0 0 0 1.57"/>
 <xacro:world_module suffix="inner" pose="16.066 1.065 0.5 0 0 0.93"/>
--->
 
 <xacro:macro name="pole" params="index pose image">
     <model name='pole_${index}'>

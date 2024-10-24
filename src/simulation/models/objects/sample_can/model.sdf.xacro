@@ -16,7 +16,12 @@
     </xacro:macro>
 
     <collision name="can_collision">
-        <xacro:can_stl/>
+        <geometry>
+            <cylinder>
+                <radius>0.05</radius>
+                <length>0.1</length>
+            </cylinder>
+        </geometry>
     </collision>
 
     <visual name="can_visual">
