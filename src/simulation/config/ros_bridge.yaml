@@ -26,14 +26,26 @@
   gz_type_name: "gz.msgs.Odometry"
   direction: GZ_TO_ROS
 
-- ros_topic_name: "camera_info"
-  gz_topic_name: "camera_info"
+- ros_topic_name: "camera_front_info"
+  gz_topic_name: "camera_front_info"
   ros_type_name: "sensor_msgs/msg/CameraInfo"
   gz_type_name: "gz.msgs.CameraInfo"
   direction: GZ_TO_ROS
 
-- ros_topic_name: "camera"
-  gz_topic_name: "camera"
+- ros_topic_name: "camera_front"
+  gz_topic_name: "camera_front"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "camera_top_info"
+  gz_topic_name: "camera_top_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "camera_top"
+  gz_topic_name: "camera_top"
   ros_type_name: "sensor_msgs/msg/Image"
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS

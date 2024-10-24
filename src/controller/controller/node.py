@@ -16,5 +16,6 @@ class ControlNode(Node):
 
     def control_callback(self):
         twist = Twist()
-        twist.linear.x = 0.2
+        twist.linear.x = 0.5
+        twist.angular.z = 0.5
         self.cmd_vel.publish(twist)

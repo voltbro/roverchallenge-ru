@@ -3,6 +3,7 @@
 
 <xacro:include filename="$(env MODELS_DIR)/rover/rover.urdf.xacro" />
 <xacro:include filename="$(find ruka_gz)/config/ruka_gz.urdf.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/cameras/d435.xacro" />
 
 <joint name="ruka_to_rover" type="fixed">
     <parent link="base"/>

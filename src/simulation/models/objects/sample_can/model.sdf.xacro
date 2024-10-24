@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<sdf xmlns:xacro="http://www.ros.org/wiki/xacro" version="1.10">
+<model name="sample_can">
+<pose>0 0 0 0 0 0</pose>
+<static>false</static>
+
+<link name="can">
+    <self_collide>false</self_collide>
+    <xacro:macro name="can_stl">
+        <geometry>
+            <mesh>
+                <uri>file:/$(env MODELS_DIR)/objects/sample_can/sample-can.stl</uri>
+                <scale>1 1 1</scale>
+            </mesh>
+        </geometry>
+    </xacro:macro>
+
+    <collision name="can_collision">
+        <xacro:can_stl/>
+    </collision>
+
+    <visual name="can_visual">
+        <xacro:can_stl/>
+        <material>
+            <script>
+                <uri>file://media/materials/scripts/gazebo.material</uri>
+                <name>Gazebo/Yellow</name>
+            </script>
+        </material>
+    </visual>
+
+    <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.2</mass>
+        <inertia>
+          <ixx>0.000205</ixx>
+          <iyy>0.000205</iyy>
+          <izz>0.0000642</izz>
+        </inertia>
+    </inertial>
+</link>
+
+</model>
+</sdf>

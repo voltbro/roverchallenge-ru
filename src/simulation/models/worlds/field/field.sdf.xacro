@@ -93,5 +93,10 @@
 <xacro:pole index="5" pose="1.3 9.7 ${pole_z_offset + 0.9} 0 0 0" image="36.png"/>
 <xacro:pole index="6" pose="1 19 ${pole_z_offset + 1.6} 0 0 0" image="37.png"/>
 
+<include>
+    <uri>file:/$(env MODELS_DIR)/objects/sample_can</uri>
+    <pose>15.88784329 1.74618694 0.992 0 0 0</pose>
+</include>
+
 </world>
 </sdf>
