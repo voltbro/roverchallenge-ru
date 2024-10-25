@@ -3,12 +3,34 @@
 
 <xacro:include filename="$(env MODELS_DIR)/rover/rover.urdf.xacro" />
 <xacro:include filename="$(find ruka_gz)/config/ruka_gz.urdf.xacro" />
-<xacro:include filename="$(env MODELS_DIR)/objects/cameras/d435.xacro" />
+<xacro:include filename="$(env MODELS_DIR)/objects/cameras/d405.xacro" />
 
 <joint name="ruka_to_rover" type="fixed">
     <parent link="base"/>
     <child link="base_link"/>
     <origin rpy="0 0 0" xyz="0.2 0 0.251"/>
+</joint>
+
+<link name="ruka_realsense_mount">
+    <visual name="ruka_realsense_mount_visual">
+        <geometry>
+            <mesh filename="file://$(env MODELS_DIR)/explorer/j5-d405-mount.stl"/>
+        </geometry>
+        <material name="black">
+            <color rgba="0 0 0 1.0"/>
+        </material>
+    </visual>
+</link>
+<joint name="realsense_mount_to_ruka" type="fixed">
+    <parent link="link_05"/>
+    <child link="ruka_realsense_mount"/>
+    <origin xyz="0.029 -0.009 0" rpy="${pi/2} -${pi/2} ${pi/2}"/>
+</joint>
+<xacro:realsense-d405 suffix='_ruka'/>
+<joint name="camera_to_ruka" type="fixed">
+    <parent link="ruka_realsense_mount"/>
+    <child link="realsense_d405_ruka_frame"/>
+    <origin xyz="0 0.014 0.058" rpy="0 0.35 ${pi/2}" />
 </joint>
 
 <gazebo>

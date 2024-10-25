@@ -140,8 +140,6 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
 </joint>
 
-
-
 <!-- CAMERA BLOCK-->
 <xacro:include filename="$(env MODELS_DIR)/objects/cameras/d435.xacro" />
 <xacro:include filename="$(env MODELS_DIR)/objects/cameras/fov120.xacro" />

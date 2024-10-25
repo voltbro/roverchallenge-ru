@@ -40,8 +40,7 @@ def generate_gz_sim(context: LaunchContext, world_path: LaunchConfiguration):
             PythonLaunchDescriptionSource(str(pkg_ros_gz_sim / "launch" / "gz_sim.launch.py")),
             launch_arguments={
                 "gz_args": f"--gui-config {str(SIM_DIR / 'config' / 'gz.config')} \
-                         --render-engine ogre \
-                         {str(MODELS_DIR / world_path_str)}"
+                             {str(MODELS_DIR / world_path_str)}"
             }.items(),
         )
     ]

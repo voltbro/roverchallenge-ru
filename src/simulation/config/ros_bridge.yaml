@@ -50,6 +50,18 @@
   gz_type_name: "gz.msgs.Image"
   direction: GZ_TO_ROS
 
+- ros_topic_name: "camera_ruka_info"
+  gz_topic_name: "camera_ruka_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "camera_ruka"
+  gz_topic_name: "camera_ruka"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
 - ros_topic_name: "lidar"
   gz_topic_name: "lidar"
   ros_type_name: "sensor_msgs/msg/LaserScan"

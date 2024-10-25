@@ -16,7 +16,7 @@
 <joint name="realsense_d405${suffix}_camera_joint" type="fixed">
     <parent link="realsense_d405${suffix}_frame"/>
     <child link="realsense_d405${suffix}_camera"/>
-    <origin xyz="0.024 0 0" rpy="${pi/2} 0 0"/>
+    <origin xyz="0.024 0 0.024" rpy="0 0 0"/>
 </joint>
 
 <gazebo reference="realsense_d405${suffix}_camera">
@@ -28,7 +28,7 @@
                 <height>360</height>
             </image>
             <clip>
-                <near>0.1</near>
+                <near>0.01</near>
                 <far>100</far>
             </clip>
         </camera>
