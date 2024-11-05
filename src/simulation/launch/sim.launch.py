@@ -168,6 +168,26 @@ def add_ros_bridge(ld: LaunchDescription):
     )
 
 
+def add_radiolink(ld: LaunchDescription):
+    ld.add_action(DeclareLaunchArgument("joy", default_value="true", description="Add joystick control"))
+    ld.add_action(
+        Node(
+            package="joy",
+            executable="joy_node",
+            output="screen",
+            condition=IfCondition(LaunchConfiguration("joy")),
+        )
+    )
+    ld.add_action(
+        Node(
+            package="radiolink",
+            executable="radiolink",
+            output="screen",
+            condition=IfCondition(LaunchConfiguration("joy")),
+        )
+    )
+
+
 def generate_launch_description():
     ld = LaunchDescription()
     use_sim_time = LaunchConfiguration("use_sim_time", default=False)
@@ -189,5 +209,7 @@ def generate_launch_description():
     add_moveit(ld)
     # Rviz
     add_rviz(ld)
+    # Radiolink
+    add_radiolink(ld)
 
     return ld
