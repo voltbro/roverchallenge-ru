@@ -57,6 +57,8 @@ reboot
 ```
 cd
 git clone https://github.com/voltbro/roverchallenge-ru.git
+git submodule set-url -- src/ruka_gz https://github.com/VB-Industrial/ruka_gz.git
+git submodule update --init
 ```
 
 ### Установка зависимостей
@@ -92,8 +94,6 @@ rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
 ```
 cd ~/roverchallenge-ru/
 source setup.sh
-git submodule set-url -- src/ruka_gz https://github.com/VB-Industrial/ruka_gz.git
-git submodule update --init
 just build
 ```
 
