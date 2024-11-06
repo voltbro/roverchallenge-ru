@@ -1,23 +1,123 @@
 # Информация о разработке
 
-## Зависимости
+## Установка ROS 2 Jazzy
 
-**APT**: `sudo apt update && sudo apt upgrade && sudo apt install just ros-jazzy-joy ros-jazzy-ros2-control ros-jazzy-gz-ros2-control ros-jazzy-ros2-controllers ros-jazzy-ros-gz ros-jazzy-moveit ros-jazzy-moveit-planners-chomp ros-jazzy-imu-tools can-utils`
+```
+locale  
 
-**rosdep**: `rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y`
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+locale  # verify settings
+```
+
+```
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+```
+
+```
+sudo apt update -y && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+```
+
+```
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+
+```
+sudo apt update - y && sudo apt install ros-dev-tools - y
+```
+
+```
+sudo apt update - y && sudo apt upgrade -y
+```
+
+```
+sudo apt install ros-jazzy-desktop -y
+```
+
+```
+echo 'source /opt/ros/jazzy/setup.bash' >> ~/.bashrc
+```
+
+```
+sync
+reboot
+```
+
+## Установка симулятора
+
+### Скачивание симулятора
+
+Для того, чтобы скачать симулятор откройте терминал и выполните следующие команды:
+
+```
+cd
+git clone https://github.com/voltbro/roverchallenge-ru.git
+```
+
+### Установка зависимостей
+
+Для начала необходимо установить пакетные (APT) зависимости. Для этого откройте терминал и выполните следующую команду:
+
+```
+sudo apt update && sudo apt upgrade && sudo apt install python3-pip jsonnet just ros-jazzy-joy ros-jazzy-ros2-control ros-jazzy-gz-ros2-control ros-jazzy-ros2-controllers ros-jazzy-ros-gz ros-jazzy-moveit ros-jazzy-moveit-planners-chomp ros-jazzy-imu-tools can-utils -y
+```
+
+```
+echo "export PIP_BREAK_SYSTEM_PACKAGES=1" >> ~/.bashrc
+reboot
+```
+
+Далее необходимо установить ROS зависимости. Для этого в терминале выполните следующие команды:
+
+```
+sudo rosdep init
+rosdep update
+```
+
+Перезапустите терминал и выполните следующую команду:
+
+```
+rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
+```
 
 ## Первый запуск
 
-- `source setup.sh`
-- `just build`
-- Пересоздать терминал
-- `source setup.sh`
-- `just sim world:=worlds/field/field.sdf`
+При первом запуске симуляции необходимо выполнить ряд несложных программ. При последующих запусках этого не потребуется. Откройте терминал и выполните следующие команды:
+
+```
+cd ~/roverchallenge-ru/
+source setup.sh
+git submodule set-url -- src/ruka_gz https://github.com/VB-Industrial/ruka_gz.git
+git submodule update --init
+just build
+```
+
+Закройте терминал и откройте по новой
+
+```
+cd ~/roverchallenge-ru/
+source setup.sh
+just build
+just sim world:=worlds/field/field.sdf
+```
+
 
 ## Обычный запуск
 
 Один раз в начале работы:
-- `source setup.sh`
 
-Для запуска:
-- `just sim world:=worlds/field/field.sdf`
+```
+cd ~/roverchallenge-ru/
+source setup.sh
+```
+
+Для запуска симуляции в этом же терминале:
+
+```
+just sim world:=worlds/field/field.sdf
+```
