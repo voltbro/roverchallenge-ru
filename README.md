@@ -28,11 +28,11 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 ```
 
 ```
-sudo apt update - y && sudo apt install ros-dev-tools - y
+sudo apt update -y && sudo apt install ros-dev-tools -y
 ```
 
 ```
-sudo apt update - y && sudo apt upgrade -y
+sudo apt update -y && sudo apt upgrade -y
 ```
 
 ```
