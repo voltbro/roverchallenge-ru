@@ -1,8 +1,4 @@
-if [ -z "$CONTROL_ROOT" ]; then
-    toplevel_dir=$(git rev-parse --show-toplevel)
-else
-    toplevel_dir=${CONTROL_ROOT}
-fi
+toplevel_dir=$(realpath $(dirname "$BASH_SOURCE"))
 
 echo "Root is - ${toplevel_dir}"
 if [ ! -f "${toplevel_dir}/setup.sh" ]; then
