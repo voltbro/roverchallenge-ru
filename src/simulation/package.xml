@@ -16,6 +16,9 @@
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>ruka_gz</exec_depend>
+
+  <build_depend>ruka_gz</build_depend>
 
   <!-- Additional packages-->
   <depend>usb_cam</depend>
