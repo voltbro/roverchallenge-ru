@@ -91,5 +91,5 @@ rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
 Для запуска симуляции в этом же терминале:
 
 ```
-just sim world:=worlds/field/field.sdf
+just sim
 ```
