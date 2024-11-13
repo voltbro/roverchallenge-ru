@@ -56,9 +56,8 @@ reboot
 
 ```
 cd
-git clone https://github.com/voltbro/roverchallenge-ru.git
-git submodule set-url -- src/ruka_gz https://github.com/VB-Industrial/ruka_gz.git
-git submodule update --init
+git clone --recurse-submodules https://github.com/voltbro/roverchallenge-ru.git
+echo "source ~/roverchallenge-ru/source setup.sh" >> ~/.bashrc
 ```
 
 ### Установка зависимостей
@@ -87,34 +86,7 @@ rosdep update
 rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
 ```
 
-## Первый запуск
-
-При первом запуске симуляции необходимо выполнить ряд несложных программ. При последующих запусках этого не потребуется. Откройте терминал и выполните следующие команды:
-
-```
-cd ~/roverchallenge-ru/
-source setup.sh
-just build
-```
-
-Закройте терминал и откройте по новой
-
-```
-cd ~/roverchallenge-ru/
-source setup.sh
-just build
-just sim world:=worlds/field/field.sdf
-```
-
-
-## Обычный запуск
-
-Один раз в начале работы:
-
-```
-cd ~/roverchallenge-ru/
-source setup.sh
-```
+## запуск
 
 Для запуска симуляции в этом же терминале:
 
