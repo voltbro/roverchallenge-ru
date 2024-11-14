@@ -1,4 +1,8 @@
-# Информация о разработке
+# Симулятор космического ровера "Исследователь" с манипулятором RUKA на ROS2
+
+Данный симулятор предназначен для виртуальной работы с реальными роботами проекта "Братья Вольт":
+
+- Ровер "Исследователь": 
 
 ## Установка ROS 2 Jazzy
 
@@ -24,23 +28,23 @@ locale  # verify settings
 
 ###  Включение необходимых репозиториев
 
-Добавим репозиторий ROS 2 apt в вашу систему.
+Добавьте репозиторий ROS 2 apt в вашу систему.
 
-Сначала убедимся, что Репозиторий Ubuntu Universe включен:
+Сначала убедитесь, что репозиторий Ubuntu Universe включен:
 
 ```
 sudo apt install software-properties-common
 sudo add-apt-repository universe
 ```
 
-Теперь добавим GPG-ключ ROS 2 с помощью apt:
+Теперь добавьте GPG-ключ ROS 2 с помощью apt:
 
 ```
 sudo apt update -y && sudo apt install curl -y
 sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 ```
 
-Затем добавим репозиторий в список источников:
+Затем добавьте репозиторий в список источников:
 
 ```
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
@@ -56,7 +60,7 @@ sudo apt update -y && sudo apt install ros-dev-tools -y
 
 ### Установка ROS 2
 
-Обновите кэши репозиториев apt после настройки репозиториев. Пакеты ROS 2 создаются на основе часто обновляемых систем Ubuntu. Перед установкой новых пакетов всегда рекомендуется убедиться, что ваша система обновлена:
+Обновите кэши репозиториев apt после настройки репозиториев. Пакеты ROS 2 создаются на основе часто обновляемых систем Ubuntu. Перед установкой новых пакетов всегда рекомендуем убедиться, что ваша система обновлена:
 
 ```
 sudo apt update -y && sudo apt upgrade -y
@@ -72,14 +76,13 @@ sudo apt install ros-jazzy-desktop -y
 
 Настройка рабочих параметров ROS, происходит через установку переменных окружения (например пути библиотек, адреса серверов и тд). Эту операцию можно делать руками, но проще настроить их автоматический экспорт при запуске интерактивной оболочки bash.
 
-Добавим переменные окружения ROS, для их автоматической установки при запуске bash:
+Добавьте переменные окружения ROS, для их автоматической установки при запуске bash:
 
 ```
 echo 'source /opt/ros/jazzy/setup.bash' >> ~/.bashrc
-source ~/.bashrc
 ```
 
-Синхронизируем установленные файлы и перезагрузим компьютер:
+Синхронизируйте установленные файлы и перезагрузите компьютер:
 
 ```
 sync
@@ -95,7 +98,7 @@ reboot
 ```
 cd
 git clone --recurse-submodules https://github.com/voltbro/roverchallenge-ru.git
-echo "source ~/roverchallenge-ru/source setup.sh" >> ~/.bashrc
+echo "source ~/roverchallenge-ru/setup.sh" >> ~/.bashrc
 ```
 
 ### Установка зависимостей
@@ -110,7 +113,7 @@ sudo apt update && sudo apt upgrade && sudo apt install python3-pip jsonnet just
 echo "export PIP_BREAK_SYSTEM_PACKAGES=1" >> ~/.bashrc
 ```
 
-Синхронизируем установленные файлы и перезагрузим компьютер:
+Синхронизируйте установленные файлы и перезагрузите компьютер:
 
 ```
 sync
@@ -130,10 +133,22 @@ rosdep update
 rosdep install -r --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
 ```
 
-## запуск
-
-Для запуска симуляции в этом же терминале:
+Синхронизируйте установленные файлы и перезагрузите компьютер:
 
 ```
+sync
+reboot
+```
+
+## Запуск симуляции
+
+Для запуска симуляции перейдите в папку с симулятором и запустите его:
+
+```
+cd ~/roverchallenge-ru/
 just sim
 ```
+
+После запуска вы должны увидеть симулятор Gazebo и среду визуализации RViz:
+
+![Simulator_ROS2](https://github.com/user-attachments/assets/9a479dd4-403d-4034-8b4d-8b78eca259ab)
