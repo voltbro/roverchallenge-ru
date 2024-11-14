@@ -3,6 +3,10 @@
 ## Установка ROS 2 Jazzy
 
 ```
+
+```
+sudo apt update -y && sudo apt upgrade -y
+```
 locale  
 
 sudo apt update && sudo apt install locales
